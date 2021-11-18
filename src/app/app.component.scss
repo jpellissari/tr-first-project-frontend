@@ -1,0 +1,15 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar {
+  width: 15%;
+  margin-top: -21px;
+}
+
+.main {
+  width: 85%;
+}
