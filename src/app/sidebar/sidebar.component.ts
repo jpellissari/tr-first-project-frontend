@@ -6,6 +6,7 @@ import {
   faSuitcase,
   faUsers
 } from '@fortawesome/free-solid-svg-icons';
+import { defaultIcons, IconsType } from '../shared/defaults/icons';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,13 +14,9 @@ import {
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
-  icons = {
-    home: faHome,
-    clients: faBuilding,
-    jobPositions: faSuitcase,
-    employees: faUsers,
-    employeeLeaves: faPlaneDeparture
-  };
+  public icons: IconsType;
 
-  constructor() {}
+  constructor() {
+    this.icons = defaultIcons;
+  }
 }
