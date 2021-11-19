@@ -1,0 +1,32 @@
+{
+  "clients": [
+    {
+      "id": "1",
+      "name": "ACME LDTA"
+    },
+    {
+      "id": "2",
+      "name": "Moretti & Pellissari LTDA"
+    },
+    {
+      "id": "3",
+      "name": "John Doo ME"
+    },
+    {
+      "id": "4",
+      "name": "Teste 1"
+    },
+    {
+      "id": "7RY5q0I",
+      "name": "Novo cliente Editado"
+    },
+    {
+      "name": "Novo cliente",
+      "id": "HLxAJqb"
+    },
+    {
+      "name": "teste",
+      "id": "LFRwxvO"
+    }
+  ]
+}
