@@ -19,8 +19,8 @@
           <thead>
             <th>Name</th>
           </thead>
-          <tr>
-            <td>client.name</td>
+          <tr *ngFor="let client of clients$ | async">
+            <td>{{ client.name }}</td>
           </tr>
         </table>
       </div>
