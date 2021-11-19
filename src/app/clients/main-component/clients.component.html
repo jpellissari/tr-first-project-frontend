@@ -1,0 +1,32 @@
+<section class="clients">
+  <div class="clients__topbar">
+    <h2>Clients</h2>
+  </div>
+  <div class="clients__content">
+    <div class="actions">
+      <input
+        class="actions__search"
+        type="text"
+        placeholder="Search Client..."
+      />
+      <button class="button button--primary button--big" (click)="openForm()">
+        Add Client
+      </button>
+    </div>
+    <div class="content__main">
+      <div class="main__table">
+        <table>
+          <thead>
+            <th>Name</th>
+          </thead>
+          <tr>
+            <td>client.name</td>
+          </tr>
+        </table>
+      </div>
+      <div class="content__form" *ngIf="sideForm">
+        <app-new-client (formClosedEvent)="closeForm()"></app-new-client>
+      </div>
+    </div>
+  </div>
+</section>
