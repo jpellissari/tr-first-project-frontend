@@ -5,9 +5,11 @@ import { ClientsRoutingModule } from './clients-routing.module';
 import { ClientsComponent } from './main-component/clients.component';
 import { NewClientComponent } from './new-client/new-client.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ClientsService } from './service/clients.service';
 
 @NgModule({
   declarations: [ClientsComponent, NewClientComponent],
-  imports: [CommonModule, ClientsRoutingModule, ReactiveFormsModule]
+  imports: [CommonModule, ClientsRoutingModule, ReactiveFormsModule],
+  providers: [ClientsService]
 })
 export class ClientsModule {}
