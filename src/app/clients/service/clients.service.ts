@@ -18,4 +18,9 @@ export class ClientsService {
   create(name: string) {
     return this.http.post(this.API, { name }).pipe(take(1));
   }
+
+  update(client: Client) {
+    const { id, name } = client;
+    return this.http.put(`${this.API}/${id}`, { name }).pipe(take(1));
+  }
 }
