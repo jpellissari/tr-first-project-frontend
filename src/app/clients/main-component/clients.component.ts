@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -7,7 +8,8 @@ import { ToastService } from 'src/app/shared/toast.service';
 import { Client } from '../models/client';
 import { ClientsService } from '../service/clients.service';
 
-type FormType = {
+type SideForm = {
+  status: boolean;
   type: 'create' | 'update';
 };
 
@@ -17,8 +19,7 @@ type FormType = {
   styleUrls: ['./clients.component.scss']
 })
 export class ClientsComponent implements OnInit {
-  sideForm: boolean;
-  formType: FormType = { type: 'create' };
+  sideForm!: SideForm;
   selectedClient!: Client;
   clients$!: Observable<Client[]>;
   error$ = new Subject<boolean>();
@@ -27,11 +28,14 @@ export class ClientsComponent implements OnInit {
     private readonly clientsService: ClientsService,
     private readonly toastService: ToastService,
     private readonly loadingService: LoadingService
-  ) {
-    this.sideForm = false;
-  }
+  ) {}
 
   ngOnInit() {
+    this.fetchClients();
+    this.initSideForm();
+  }
+
+  private fetchClients() {
     this.loadingService.start();
 
     this.clients$ = this.clientsService.list().pipe(
@@ -40,6 +44,13 @@ export class ClientsComponent implements OnInit {
         return this.handleError();
       })
     );
+  }
+
+  private initSideForm() {
+    this.sideForm = {
+      status: false,
+      type: 'create'
+    };
   }
 
   handleError() {
@@ -51,22 +62,27 @@ export class ClientsComponent implements OnInit {
     return EMPTY;
   }
 
-  openForm(form: 'update' | 'create'): void {
-    this.formType.type = form;
-    this.sideForm = true;
+  openCreateForm(): void {
+    this.sideForm = {
+      status: true,
+      type: 'create'
+    };
   }
 
   openUpdateForm(client: Client): void {
-    this.formType.type = 'update';
     this.selectedClient = client;
-    this.sideForm = true;
+
+    this.sideForm = {
+      status: true,
+      type: 'update'
+    };
   }
 
-  closeForm(): void {
-    this.sideForm = false;
+  closeSideForm() {
+    this.sideForm.status = false;
   }
 
   refresh() {
-    this.ngOnInit();
+    this.fetchClients();
   }
 }

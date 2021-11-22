@@ -11,7 +11,7 @@
       />
       <button
         class="button button--primary button--big"
-        (click)="openForm('create')"
+        (click)="openCreateForm()"
       >
         Add Client
       </button>
@@ -43,16 +43,20 @@
           </ng-template>
         </ng-template>
       </div>
-      <div class="content__form" style="position: relative" *ngIf="sideForm">
+      <div
+        class="content__form"
+        style="position: relative"
+        *ngIf="sideForm.status"
+      >
         <app-new-client
-          *ngIf="formType.type === 'create'"
-          (formClosedEvent)="closeForm()"
+          *ngIf="sideForm.type === 'create'"
+          (formClosedEvent)="closeSideForm()"
           (clientCreated)="refresh()"
         ></app-new-client>
         <app-edit-client
-          *ngIf="formType.type === 'update'"
+          *ngIf="sideForm.type === 'update'"
           [client]="selectedClient"
-          (formClosedEvent)="closeForm()"
+          (formClosedEvent)="closeSideForm()"
           (clientUpdated)="refresh()"
         ></app-edit-client>
       </div>
