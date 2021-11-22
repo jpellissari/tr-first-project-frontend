@@ -1,16 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
+import { catchError, delay, take } from 'rxjs/operators';
 
 import { Client } from '../models/client';
 
 @Injectable()
 export class ClientsService {
-  private readonly API = 'http://localhost:3000/clients';
+  private readonly API = 'http://localhost:8080/clients';
 
   constructor(private readonly http: HttpClient) {}
 
   list(): Observable<Client[]> {
     return this.http.get<Client[]>(this.API);
+  }
+
+  create(name: string) {
+    return this.http.post(this.API, { name }).pipe(take(1));
   }
 }
