@@ -20,16 +20,16 @@ export class ClientsComponent implements OnInit {
   constructor(
     private readonly clientsService: ClientsService,
     private readonly toastService: ToastService,
-    private readonly loading: LoadingService
+    private readonly loadingService: LoadingService
   ) {
     this.sideForm = false;
   }
 
   ngOnInit() {
-    this.loading.start();
+    this.loadingService.start();
 
     this.clients$ = this.clientsService.list().pipe(
-      tap(() => this.loading.stop()),
+      tap(() => this.loadingService.stop()),
       catchError(() => {
         return this.handleError();
       })
@@ -45,11 +45,15 @@ export class ClientsComponent implements OnInit {
   }
 
   handleError() {
-    this.loading.stop();
+    this.loadingService.stop();
     this.error$.next(true);
     this.toastService.showErrorMessage(
       'Erro ao carregar lista de clientes. Tente mais tarde.'
     );
     return EMPTY;
+  }
+
+  refresh() {
+    this.ngOnInit();
   }
 }

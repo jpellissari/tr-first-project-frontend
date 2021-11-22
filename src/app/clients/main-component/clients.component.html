@@ -35,8 +35,11 @@
           </ng-template>
         </ng-template>
       </div>
-      <div class="content__form" *ngIf="sideForm">
-        <app-new-client (formClosedEvent)="closeForm()"></app-new-client>
+      <div class="content__form" style="position: relative" *ngIf="sideForm">
+        <app-new-client
+          (formClosedEvent)="closeForm()"
+          (clientCreated)="refresh()"
+        ></app-new-client>
       </div>
     </div>
   </div>
