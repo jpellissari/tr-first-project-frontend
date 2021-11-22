@@ -7,6 +7,10 @@ import { ToastService } from 'src/app/shared/toast.service';
 import { Client } from '../models/client';
 import { ClientsService } from '../service/clients.service';
 
+type FormType = {
+  type: 'create' | 'update';
+};
+
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.component.html',
@@ -14,6 +18,8 @@ import { ClientsService } from '../service/clients.service';
 })
 export class ClientsComponent implements OnInit {
   sideForm: boolean;
+  formType: FormType = { type: 'create' };
+  selectedClient!: Client;
   clients$!: Observable<Client[]>;
   error$ = new Subject<boolean>();
 
@@ -36,14 +42,6 @@ export class ClientsComponent implements OnInit {
     );
   }
 
-  openForm(): void {
-    this.sideForm = true;
-  }
-
-  closeForm(): void {
-    this.sideForm = false;
-  }
-
   handleError() {
     this.loadingService.stop();
     this.error$.next(true);
@@ -51,6 +49,21 @@ export class ClientsComponent implements OnInit {
       'Erro ao carregar lista de clientes. Tente mais tarde.'
     );
     return EMPTY;
+  }
+
+  openForm(form: 'update' | 'create'): void {
+    this.formType.type = form;
+    this.sideForm = true;
+  }
+
+  openUpdateForm(client: Client): void {
+    this.formType.type = 'update';
+    this.selectedClient = client;
+    this.sideForm = true;
+  }
+
+  closeForm(): void {
+    this.sideForm = false;
   }
 
   refresh() {

@@ -9,7 +9,10 @@
         type="text"
         placeholder="Search Client..."
       />
-      <button class="button button--primary button--big" (click)="openForm()">
+      <button
+        class="button button--primary button--big"
+        (click)="openForm('create')"
+      >
         Add Client
       </button>
     </div>
@@ -20,7 +23,12 @@
             <th>Name</th>
           </thead>
           <tr *ngFor="let client of clients">
-            <td>{{ client.name }}</td>
+            <td
+              [class.active]="client && client.id === client.id"
+              (click)="openUpdateForm(client)"
+            >
+              {{ client.name }}
+            </td>
           </tr>
         </table>
 
@@ -37,9 +45,16 @@
       </div>
       <div class="content__form" style="position: relative" *ngIf="sideForm">
         <app-new-client
+          *ngIf="formType.type === 'create'"
           (formClosedEvent)="closeForm()"
           (clientCreated)="refresh()"
         ></app-new-client>
+        <app-edit-client
+          *ngIf="formType.type === 'update'"
+          [client]="selectedClient"
+          (formClosedEvent)="closeForm()"
+          (clientUpdated)="refresh()"
+        ></app-edit-client>
       </div>
     </div>
   </div>
