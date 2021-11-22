@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { EMPTY, Observable, Subject } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { LoadingService } from 'src/app/shared/loading.service';
+
+import { ToastService } from 'src/app/shared/toast.service';
 import { Client } from '../models/client';
 import { ClientsService } from '../service/clients.service';
 
@@ -8,13 +12,28 @@ import { ClientsService } from '../service/clients.service';
   templateUrl: './clients.component.html',
   styleUrls: ['./clients.component.scss']
 })
-export class ClientsComponent {
+export class ClientsComponent implements OnInit {
   sideForm: boolean;
-  clients$: Observable<Client[]>;
+  clients$!: Observable<Client[]>;
+  error$ = new Subject<boolean>();
 
-  constructor(private readonly clientsService: ClientsService) {
+  constructor(
+    private readonly clientsService: ClientsService,
+    private readonly toastService: ToastService,
+    private readonly loading: LoadingService
+  ) {
     this.sideForm = false;
-    this.clients$ = this.clientsService.list();
+  }
+
+  ngOnInit() {
+    this.loading.start();
+
+    this.clients$ = this.clientsService.list().pipe(
+      tap(() => this.loading.stop()),
+      catchError(() => {
+        return this.handleError();
+      })
+    );
   }
 
   openForm(): void {
@@ -23,5 +42,14 @@ export class ClientsComponent {
 
   closeForm(): void {
     this.sideForm = false;
+  }
+
+  handleError() {
+    this.loading.stop();
+    this.error$.next(true);
+    this.toastService.showErrorMessage(
+      'Erro ao carregar lista de clientes. Tente mais tarde.'
+    );
+    return EMPTY;
   }
 }

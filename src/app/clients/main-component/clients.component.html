@@ -14,15 +14,26 @@
       </button>
     </div>
     <div class="content__main">
-      <div class="main__table">
-        <table>
+      <div class="main__table" style="position: relative">
+        <table *ngIf="clients$ | async as clients; else loadingError">
           <thead>
             <th>Name</th>
           </thead>
-          <tr *ngFor="let client of clients$ | async">
+          <tr *ngFor="let client of clients">
             <td>{{ client.name }}</td>
           </tr>
         </table>
+
+        <ng-template #loadingError>
+          <div *ngIf="error$ | async; else loading">
+            <span>
+              Erro ao carregar lista de clientes. Tente novamente mais tarde.
+            </span>
+          </div>
+          <ng-template #loading>
+            <ngx-spinner><p style="color: white">Loading...</p></ngx-spinner>
+          </ng-template>
+        </ng-template>
       </div>
       <div class="content__form" *ngIf="sideForm">
         <app-new-client (formClosedEvent)="closeForm()"></app-new-client>
