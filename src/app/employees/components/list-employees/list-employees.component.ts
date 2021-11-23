@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject, EMPTY } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
-import { Client } from 'src/app/clients/models/client';
-import { ClientsService } from 'src/app/clients/service/clients.service';
 import { SideForm } from 'src/app/shared/models/side-form';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
