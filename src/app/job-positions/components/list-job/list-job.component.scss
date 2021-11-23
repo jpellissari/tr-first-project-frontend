@@ -1,5 +1,4 @@
 .jobs {
-  margin: 0 30px;
   display: grid;
   grid-template-areas:
     'topbar'
@@ -14,7 +13,7 @@
   h2 {
     display: block;
     width: 100%;
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     padding-bottom: 26px;
   }
 }

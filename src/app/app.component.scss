@@ -1,15 +1,21 @@
 .container {
   min-height: 100vh;
-  display: flex;
-  margin: 0;
-  padding: 0;
 }
 
 .sidebar {
   width: 15%;
-  margin-top: -21px;
+  background: #2b2b2b;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 9999;
 }
 
 .main {
+  padding: 20px 30px 0;
   width: 85%;
+  position: absolute;
+  top: 0;
+  left: 15%;
 }
