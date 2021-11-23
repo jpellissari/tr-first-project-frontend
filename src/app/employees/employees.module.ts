@@ -5,7 +5,8 @@ import { EmployeesRoutingModule } from './employees-routing.module';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
 import { ListEmployeesComponent } from './components/list-employees/list-employees.component';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,9 @@ import { ListEmployeesComponent } from './components/list-employees/list-employe
   ],
   imports: [
     CommonModule,
-    EmployeesRoutingModule
+    EmployeesRoutingModule,
+    NgxSpinnerModule,
+    NzTableModule
   ]
 })
-export class EmployeesModule { }
+export class EmployeesModule {}

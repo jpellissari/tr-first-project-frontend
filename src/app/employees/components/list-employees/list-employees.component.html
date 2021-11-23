@@ -1,1 +1,86 @@
-<p>list-employees works!</p>
+<section class="employees">
+  <div class="employees__topbar">
+    <h2>Funcionários</h2>
+  </div>
+  <div class="employees__content">
+    <div class="actions">
+      <input
+        class="actions__search"
+        type="text"
+        placeholder="Buscar Funcionários..."
+      />
+      <button
+        class="button button--primary button--big"
+        (click)="openCreateForm()"
+      >
+        Adicionar Funcionário
+      </button>
+    </div>
+    <div class="content__main">
+      <div class="main__table" style="position: relative">
+        <nz-table
+          *ngIf="employees$ | async as employees; else loadingError"
+          #basicTable
+          [nzData]="employees"
+        >
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Empresa</th>
+              <th>Cargo</th>
+              <th>CPF</th>
+              <th>Data de Nascimento</th>
+              <th>Salário</th>
+              <th>Ativo</th>
+              <th>Tipo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let employee of employees"
+              (click)="openUpdateForm(employee)"
+            >
+              <td>{{ employee.name }}</td>
+              <td>{{ employee.client.name }}</td>
+              <td>{{ employee.jobPosition.name }}</td>
+              <td>{{ employee.nationalIdentity }}</td>
+              <td>{{ employee.birthdate }}</td>
+              <td>{{ employee.salary | currency: 'BRL':true }}</td>
+              <td>{{ employee.active }}</td>
+              <td>{{ employee.type }}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+
+        <ng-template #loadingError>
+          <div *ngIf="error$ | async; else loading">
+            <span>
+              Erro ao carregar lista de funcionários. Tente novamente mais
+              tarde.
+            </span>
+          </div>
+          <ng-template #loading>
+            <ngx-spinner><p style="color: white">Carregando...</p></ngx-spinner>
+          </ng-template>
+        </ng-template>
+      </div>
+      <div
+        class="content__form"
+        style="position: relative"
+        *ngIf="sideForm.status"
+      >
+        <!-- <app-add-employee
+          *ngIf="sideForm.type === 'create'"
+          (formClosedEvent)="closeSideForm()"
+          (employeeCreated)="refresh()"
+        ></app-add-employee>
+        <app-edit-employee
+          *ngIf="sideForm.type === 'update'"
+          [employee]="selectedClient"
+          (formClosedEvent)="closeSideForm()"
+          (clientUpdated)="refresh()"
+        ></app-edit-employee> -->
+      </div>
+    </div>
+  </div>
+</section>
