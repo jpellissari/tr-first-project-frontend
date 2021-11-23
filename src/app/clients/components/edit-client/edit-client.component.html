@@ -8,6 +8,9 @@
         nz-popconfirm
         nzPopconfirmTitle="Are you sure delete this client?"
         nzPopconfirmPlacement="bottom"
+        [nzOkType]="'danger'"
+        nzOkText="excluir"
+        nzCancelText="cancelar"
         (nzOnConfirm)="deleteClient()"
         [nzIcon]="iconTpl"
       >
