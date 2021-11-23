@@ -7,6 +7,13 @@ const routes: Routes = [
     path: 'clients',
     loadChildren: () =>
       import('./clients/clients.module').then((module) => module.ClientsModule)
+  },
+  {
+    path: 'job-positions',
+    loadChildren: () =>
+      import('./job-positions/job-positions.module').then(
+        (module) => module.JobPositionsModule
+      )
   }
 ];
 
