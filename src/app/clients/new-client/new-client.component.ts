@@ -61,6 +61,7 @@ export class NewClientComponent implements OnDestroy {
         }
       );
     }
+    this.loading.stop();
   }
 
   private resetForm(): void {
