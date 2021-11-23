@@ -1,8 +1,11 @@
-interface Employee {
+import { Client } from 'src/app/clients/models/client';
+import { JobPosition } from 'src/app/job-positions/models/job-position';
+
+export interface Employee {
   id: string;
-  client_id: string;
-  job_position_id: string;
-  national_identity: string;
+  client: Client;
+  jobPosition: JobPosition;
+  nationalIdentity: string;
   type: 'employee' | 'partner' | 'intern';
   name: string;
   birthdate: Date;
