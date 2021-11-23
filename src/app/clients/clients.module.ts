@@ -12,7 +12,6 @@ import { ClientsComponent } from './main-component/clients.component';
 import { NewClientComponent } from './new-client/new-client.component';
 import { ClientsService } from './service/clients.service';
 import { EditClientComponent } from './edit-client/edit-client.component';
-import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [ClientsComponent, NewClientComponent, EditClientComponent],
@@ -21,7 +20,6 @@ import { SharedModule } from '../shared/shared.module';
     ClientsRoutingModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-    SharedModule,
     NzTableModule,
     NzPopconfirmModule,
     NzIconModule
