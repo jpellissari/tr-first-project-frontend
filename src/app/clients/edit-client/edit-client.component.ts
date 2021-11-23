@@ -68,7 +68,7 @@ export class EditClientComponent implements OnInit, OnDestroy, OnChanges {
     if (this.form.valid) {
       this.clientsService.update(this.form.getRawValue()).subscribe(
         (success) => {
-          this.handleSuccess();
+          this.handleSuccess('Client Updated!');
         },
         (error) => {
           this.handleError(error);
@@ -81,11 +81,11 @@ export class EditClientComponent implements OnInit, OnDestroy, OnChanges {
     this.confirmation = true;
   }
 
-  private deleteClient() {
+  deleteClient() {
     this.loading.start();
     this.clientsService.delete(this.form.getRawValue().id).subscribe(
       (success) => {
-        this.handleSuccess();
+        this.handleSuccess('Client deleted!');
       },
       (error) => {
         this.handleError(error);
@@ -109,9 +109,9 @@ export class EditClientComponent implements OnInit, OnDestroy, OnChanges {
     this.form.reset();
   }
 
-  private handleSuccess(): void {
+  private handleSuccess(message: string): void {
     this.resetForm();
-    this.toastService.showSuccessMessage('Client updated');
+    this.toastService.showSuccessMessage(message);
     this.clientUpdated.emit();
     this.formClosedEvent.emit();
     this.clientUpdated.emit();

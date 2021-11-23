@@ -3,12 +3,15 @@
     <div class="form__header">
       <h2 class="form__title">Edit Client</h2>
 
-      <div class="form__action--delete">
-        <fa-icon
-          class="button button"
-          (click)="openConfirmation()"
-          [icon]="['far', 'trash-alt']"
-        ></fa-icon>
+      <div
+        class="form__action--delete button"
+        nz-popconfirm
+        nzPopconfirmTitle="Are you sure delete this client?"
+        nzPopconfirmPlacement="bottom"
+        (nzOnConfirm)="deleteClient()"
+        [nzIcon]="iconTpl"
+      >
+        <i nz-icon nzType="delete" nzTheme="outline"></i>
       </div>
     </div>
 
@@ -78,5 +81,6 @@
     <ngx-spinner><p style="color: white">Loading...</p></ngx-spinner>
   </form>
 </div>
-
-<app-confirmation-dialog *ngIf="confirmation"></app-confirmation-dialog>
+<ng-template #iconTpl>
+  <i nz-icon nzType="question-circle-o" style="color: red"></i>
+</ng-template>

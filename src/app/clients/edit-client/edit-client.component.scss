@@ -7,7 +7,7 @@
 
   &__header {
     display: flex;
-    align-items: center;
+    align-items: baseline;
   }
 
   &__title {
@@ -21,6 +21,8 @@
     color: #ca0b00;
     border-radius: 4px;
     border: 1px solid #ca0b00;
+    height: 25px;
+    width: 25px;
   }
 }
 
