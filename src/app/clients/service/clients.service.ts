@@ -23,4 +23,8 @@ export class ClientsService {
     const { id, name } = client;
     return this.http.put(`${this.API}/${id}`, { name }).pipe(take(1));
   }
+
+  delete(id: string) {
+    return this.http.delete(`${this.API}/${id}`).pipe(take(1));
+  }
 }
