@@ -15,7 +15,7 @@ import { JobPositionsService } from '../../service/job-positions.service';
 })
 export class ListJobComponent implements OnInit {
   sideForm!: SideForm;
-  selectedJobPosition!: JobPosition;
+  selectedJob!: JobPosition;
   jobs$!: Observable<JobPosition[]>;
   error$ = new Subject<boolean>();
 
@@ -65,7 +65,7 @@ export class ListJobComponent implements OnInit {
   }
 
   openUpdateForm(job: JobPosition): void {
-    this.selectedJobPosition = job;
+    this.selectedJob = job;
 
     this.sideForm = {
       status: true,

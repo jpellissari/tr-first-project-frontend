@@ -1,15 +1,19 @@
 <section class="jobs">
   <div class="jobs__topbar">
-    <h2>Job Positions</h2>
+    <h2>Cargos</h2>
   </div>
   <div class="jobs__content">
     <div class="actions">
-      <input class="actions__search" type="text" placeholder="Search job..." />
+      <input
+        class="actions__search"
+        type="text"
+        placeholder="Buscar cargo..."
+      />
       <button
         class="button button--primary button--big"
         (click)="openCreateForm()"
       >
-        Add job
+        Adicionar cargo
       </button>
     </div>
     <div class="content__main">
@@ -21,7 +25,7 @@
         >
           <thead>
             <tr>
-              <th>Name</th>
+              <th>Nome</th>
             </tr>
           </thead>
           <tbody>
@@ -47,17 +51,17 @@
         style="position: relative"
         *ngIf="sideForm.status"
       >
-        <!-- <app-new-job
+        <app-add-job
           *ngIf="sideForm.type === 'create'"
           (formClosedEvent)="closeSideForm()"
           (jobCreated)="refresh()"
-        ></app-new-job>
+        ></app-add-job>
         <app-edit-job
           *ngIf="sideForm.type === 'update'"
-          [job]="selectedjob"
+          [job]="selectedJob"
           (formClosedEvent)="closeSideForm()"
           (jobUpdated)="refresh()"
-        ></app-edit-job> -->
+        ></app-edit-job>
       </div>
     </div>
   </div>
