@@ -18,19 +18,22 @@
     </div>
     <div class="content__main">
       <div class="main__table" style="position: relative">
-        <table *ngIf="clients$ | async as clients; else loadingError">
+        <nz-table
+          *ngIf="clients$ | async as clients; else loadingError"
+          #basicTable
+          [nzData]="clients"
+        >
           <thead>
-            <th>Name</th>
+            <tr>
+              <th>Name</th>
+            </tr>
           </thead>
-          <tr *ngFor="let client of clients">
-            <td
-              [class.active]="client && client.id === client.id"
-              (click)="openUpdateForm(client)"
-            >
-              {{ client.name }}
-            </td>
-          </tr>
-        </table>
+          <tbody>
+            <tr *ngFor="let client of clients" (click)="openUpdateForm(client)">
+              <td>{{ client.name }}</td>
+            </tr>
+          </tbody>
+        </nz-table>
 
         <ng-template #loadingError>
           <div *ngIf="error$ | async; else loading">

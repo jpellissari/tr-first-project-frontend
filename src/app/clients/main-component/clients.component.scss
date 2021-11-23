@@ -49,23 +49,7 @@
     border-radius: 4px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 
-    table {
-      width: 100%;
-    }
-
-    th {
-      text-align: start;
-      padding-bottom: 10px;
-      border-bottom: 1px solid black;
-    }
-
-    td {
-      height: 56px;
-      border-bottom: 1px solid #0000001a;
-    }
-
-    tr:hover {
-      background: #0000001a;
+    td:hover {
       cursor: pointer;
     }
   }
