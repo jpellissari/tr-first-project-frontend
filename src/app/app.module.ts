@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { ToastrModule } from 'ngx-toastr';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { en_US } from 'ng-zorro-antd/i18n';
+import { pt_BR } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
@@ -26,7 +26,7 @@ registerLocaleData(en);
     ToastrModule.forRoot(),
     FormsModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: pt_BR }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
