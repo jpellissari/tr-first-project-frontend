@@ -5,15 +5,15 @@ import { catchError, tap } from 'rxjs/operators';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { SideForm } from 'src/app/shared/models/side-form';
-import { Client } from '../models/client';
-import { ClientsService } from '../service/clients.service';
+import { Client } from '../../models/client';
+import { ClientsService } from '../../service/clients.service';
 
 @Component({
-  selector: 'app-clients',
-  templateUrl: './clients.component.html',
-  styleUrls: ['./clients.component.scss']
+  selector: 'app-list-clients',
+  templateUrl: './list-clients.component.html',
+  styleUrls: ['./list-clients.component.scss']
 })
-export class ClientsComponent implements OnInit {
+export class ListClientsComponent implements OnInit {
   sideForm!: SideForm;
   selectedClient!: Client;
   clients$!: Observable<Client[]>;

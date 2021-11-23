@@ -51,11 +51,11 @@
         style="position: relative"
         *ngIf="sideForm.status"
       >
-        <app-new-client
+        <app-add-client
           *ngIf="sideForm.type === 'create'"
           (formClosedEvent)="closeSideForm()"
           (clientCreated)="refresh()"
-        ></app-new-client>
+        ></app-add-client>
         <app-edit-client
           *ngIf="sideForm.type === 'update'"
           [client]="selectedClient"

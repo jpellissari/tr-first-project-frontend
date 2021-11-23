@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewClientComponent } from './new-client.component';
+import { NewClientComponent } from './add-client.component';
 
 describe('NewClientComponent', () => {
   let component: NewClientComponent;
@@ -8,9 +8,8 @@ describe('NewClientComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewClientComponent ]
-    })
-    .compileComponents();
+      declarations: [NewClientComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

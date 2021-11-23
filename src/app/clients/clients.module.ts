@@ -8,13 +8,13 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { ClientsRoutingModule } from './clients-routing.module';
-import { ClientsComponent } from './main-component/clients.component';
-import { NewClientComponent } from './new-client/new-client.component';
+import { ListClientsComponent } from './components/list-clients/list-clients.component';
+import { AddClientComponent } from './components/add-client/add-client.component';
 import { ClientsService } from './service/clients.service';
-import { EditClientComponent } from './edit-client/edit-client.component';
+import { EditClientComponent } from './components/edit-client/edit-client.component';
 
 @NgModule({
-  declarations: [ClientsComponent, NewClientComponent, EditClientComponent],
+  declarations: [ListClientsComponent, AddClientComponent, EditClientComponent],
   imports: [
     CommonModule,
     ClientsRoutingModule,

@@ -3,14 +3,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
-import { ClientsService } from '../service/clients.service';
+import { ClientsService } from '../../service/clients.service';
 
 @Component({
-  selector: 'app-new-client',
-  templateUrl: './new-client.component.html',
-  styleUrls: ['./new-client.component.scss']
+  selector: 'app-add-client',
+  templateUrl: './add-client.component.html',
+  styleUrls: ['./add-client.component.scss']
 })
-export class NewClientComponent implements OnDestroy {
+export class AddClientComponent implements OnDestroy {
   @Output() formClosedEvent = new EventEmitter<void>();
   @Output() clientCreated = new EventEmitter<void>();
   submitted: boolean = false;

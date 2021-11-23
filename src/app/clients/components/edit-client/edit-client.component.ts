@@ -12,8 +12,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
-import { Client } from '../models/client';
-import { ClientsService } from '../service/clients.service';
+import { Client } from '../../models/client';
+import { ClientsService } from '../../service/clients.service';
 
 @Component({
   selector: 'app-edit-client',
