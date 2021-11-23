@@ -10,8 +10,8 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { LoadingService } from 'src/app/shared/loading.service';
-import { ToastService } from 'src/app/shared/toast.service';
+import { LoadingService } from 'src/app/shared/services/loading.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 import { Client } from '../models/client';
 import { ClientsService } from '../service/clients.service';
 

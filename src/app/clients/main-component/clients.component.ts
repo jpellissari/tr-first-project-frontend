@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { LoadingService } from 'src/app/shared/loading.service';
 
-import { ToastService } from 'src/app/shared/toast.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
+import { LoadingService } from 'src/app/shared/services/loading.service';
+import { SideForm } from 'src/app/shared/models/side-form';
 import { Client } from '../models/client';
 import { ClientsService } from '../service/clients.service';
-
-type SideForm = {
-  status: boolean;
-  type: 'create' | 'update';
-};
 
 @Component({
   selector: 'app-clients',
