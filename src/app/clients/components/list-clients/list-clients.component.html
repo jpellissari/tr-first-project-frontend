@@ -1,19 +1,19 @@
 <section class="clients">
   <div class="clients__topbar">
-    <h2>Clients</h2>
+    <h2>Clientes</h2>
   </div>
   <div class="clients__content">
     <div class="actions">
       <input
         class="actions__search"
         type="text"
-        placeholder="Search Client..."
+        placeholder="Buscar clientes..."
       />
       <button
         class="button button--primary button--big"
         (click)="openCreateForm()"
       >
-        Add Client
+        Adicionar Cliente
       </button>
     </div>
     <div class="content__main">
@@ -25,7 +25,7 @@
         >
           <thead>
             <tr>
-              <th>Name</th>
+              <th>Nome</th>
             </tr>
           </thead>
           <tbody>
@@ -42,7 +42,7 @@
             </span>
           </div>
           <ng-template #loading>
-            <ngx-spinner><p style="color: white">Loading...</p></ngx-spinner>
+            <ngx-spinner><p style="color: white">Carregando...</p></ngx-spinner>
           </ng-template>
         </ng-template>
       </div>
