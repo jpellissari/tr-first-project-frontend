@@ -7,11 +7,12 @@
 
   &__header {
     display: flex;
-    align-items: baseline;
+    align-items: center;
   }
 
   &__title {
     top: 0;
+    margin: 0;
     text-align: center;
     text-transform: capitalize;
   }
@@ -23,6 +24,9 @@
     border: 1px solid #ca0b00;
     height: 25px;
     width: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
