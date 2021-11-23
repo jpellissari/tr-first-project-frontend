@@ -13,15 +13,15 @@ export class BaseCrudService<T> {
     return this.http.get<T>(`${this.API_URL}/${id}`).pipe(take(1));
   }
 
-  private create(entity: T) {
+  private create(entity: Partial<T>) {
     return this.http.post(this.API_URL, entity).pipe(take(1));
   }
 
-  private update(id: string, entity: T) {
+  private update(id: string, entity: Partial<T>) {
     return this.http.put(`${this.API_URL}/${id}`, entity).pipe(take(1));
   }
 
-  save(entity: T, id?: string) {
+  save(entity: Partial<T>, id?: string) {
     if (id) {
       return this.update(id, entity);
     }
