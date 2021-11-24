@@ -78,6 +78,7 @@ export class EditJobComponent implements OnInit, OnChanges, OnDestroy {
         }
       );
     }
+    this.loading.stop();
   }
 
   openConfirmation() {

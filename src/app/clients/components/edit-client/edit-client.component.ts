@@ -75,6 +75,7 @@ export class EditClientComponent implements OnInit, OnDestroy, OnChanges {
         }
       );
     }
+    this.loading.stop();
   }
 
   openConfirmation() {
