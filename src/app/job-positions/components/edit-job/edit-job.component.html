@@ -1,10 +1,10 @@
 <div [hidden]="confirmation">
-  <form class="form" novalidate [formGroup]="form">
-    <div class="form__header">
-      <h2 class="form__title">Editar Cargo</h2>
+  <form class="edit-form" novalidate [formGroup]="form">
+    <div class="edit-form__header">
+      <h2 class="edit-form__title">Editar Cargo</h2>
 
       <div
-        class="form__action--delete button"
+        class="edit-form__action--delete button"
         nz-popconfirm
         nzPopconfirmTitle="Tem certeza que deseja excluir este cargo?"
         nzPopconfirmPlacement="bottom"
