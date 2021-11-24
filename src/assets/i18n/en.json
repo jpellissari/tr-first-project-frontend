@@ -1,0 +1,61 @@
+{
+  "clients": {
+    "title": "Clients",
+    "actions": {
+      "search": {
+        "placeholder": "Search Client..."
+      },
+      "add_button": "New Client"
+    }
+  },
+  "jobs": {
+    "title": "Job Positions",
+    "actions": {
+      "search": {
+        "placeholder": "Search Job Position..."
+      },
+      "add_button": "New Job Position"
+    }
+  },
+  "employees": {
+    "title": "Employees",
+    "actions": {
+      "search": {
+        "placeholder": "Search Employee..."
+      },
+      "add_button": "New Employee"
+    },
+    "table": {
+      "header": {
+        "name": "Name",
+        "client": "Client",
+        "job": "Job Position",
+        "national_identity": "National Identity",
+        "birthdate": "Birthdate",
+        "salary": "Salary",
+        "active": "Active",
+        "type": "Employee Type"
+      }
+    },
+    "type": {
+      "EMPLOYEE": "Employee",
+      "INTERN": "Intern",
+      "PARTNER": "Partner"
+    },
+    "loading": {
+      "message": "Loading...",
+      "errors": {
+        "list_loading": "Error loading employees list. Please try again."
+      }
+    }
+  },
+  "leaves": {
+    "title": "Employee's Leaves",
+    "actions": {
+      "search": {
+        "placeholder": "Search Leave..."
+      },
+      "add_button": "Add Leave"
+    }
+  }
+}

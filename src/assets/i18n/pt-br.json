@@ -1,0 +1,61 @@
+{
+  "clients": {
+    "title": "Clientes",
+    "actions": {
+      "search": {
+        "placeholder": "Buscar Cliente..."
+      },
+      "add_button": "Novo Cliente"
+    }
+  },
+  "jobs": {
+    "title": "Cargos",
+    "actions": {
+      "search": {
+        "placeholder": "Buscar Cargo..."
+      },
+      "add_button": "Novo Cargo"
+    }
+  },
+  "employees": {
+    "title": "Empregados",
+    "actions": {
+      "search": {
+        "placeholder": "Buscar Empregados..."
+      },
+      "add_button": "Novo Empregado"
+    },
+    "table": {
+      "header": {
+        "name": "Nome",
+        "client": "Cliente",
+        "job": "Cargo",
+        "national_identity": "CPF",
+        "birthdate": "Data de Nascimento",
+        "salary": "Salário",
+        "active": "Ativo",
+        "type": "Tipo"
+      }
+    },
+    "type": {
+      "EMPLOYEE": "Empregado",
+      "INTERN": "Estagiário",
+      "PARTNER": "Contribuinte"
+    },
+    "loading": {
+      "message": "Carregando...",
+      "errors": {
+        "list_loading": "Erro ao carregar lista de funcionários. Tente novamente mais tarde."
+      }
+    }
+  },
+  "leaves": {
+    "title": "Afastamentos",
+    "actions": {
+      "search": {
+        "placeholder": "Buscar Afastamento..."
+      },
+      "add_button": "Novo Afastamento"
+    }
+  }
+}
