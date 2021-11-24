@@ -1,12 +1,12 @@
 <div [hidden]="confirmation">
   <form class="form" novalidate [formGroup]="form">
     <div class="form__header">
-      <h2 class="form__title">Edit Client</h2>
+      <h2 class="form__title">Editar Cliente</h2>
 
       <div
         class="form__action--delete button"
         nz-popconfirm
-        nzPopconfirmTitle="Are you sure delete this client?"
+        nzPopconfirmTitle="Tem certeza que deseja excluir este cliente?"
         nzPopconfirmPlacement="bottom"
         [nzOkType]="'danger'"
         nzOkText="excluir"
@@ -32,12 +32,12 @@
       class="form-field"
       [ngClass]="{ 'is-invalid': submitted && hasError('name') }"
     >
-      <label for="client-name" class="form-field__label">Name: </label>
+      <label for="client-name" class="form-field__label">Nome: </label>
       <input
         class="form-field__input"
         id="client-name"
         type="text"
-        placeholder="Client's name"
+        placeholder="Nome do cliente"
         formControlName="name"
       />
       <div
@@ -72,16 +72,16 @@
         class="button button--form button--primary"
         (click)="updateClient()"
       >
-        Create
+        Editar
       </button>
       <button
         class="button button--form button--secondary"
         (click)="closeForm()"
       >
-        Cancel
+        Cancelar
       </button>
     </div>
-    <ngx-spinner><p style="color: white">Loading...</p></ngx-spinner>
+    <ngx-spinner><p style="color: white">Carregando...</p></ngx-spinner>
   </form>
 </div>
 <ng-template #iconTpl>

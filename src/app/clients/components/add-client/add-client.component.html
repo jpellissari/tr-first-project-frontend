@@ -1,16 +1,16 @@
 <form class="form" novalidate [formGroup]="form">
-  <h2 class="form__title">New Client</h2>
+  <h2 class="form__title">Novo Cliente</h2>
 
   <div
     class="form-field"
     [ngClass]="{ 'is-invalid': submitted && hasError('name') }"
   >
-    <label for="client-name" class="form-field__label">Name: </label>
+    <label for="client-name" class="form-field__label">Nome: </label>
     <input
       class="form-field__input"
       id="client-name"
       type="text"
-      placeholder="Client's name"
+      placeholder="Nome do cliente"
       formControlName="name"
     />
     <div
@@ -45,11 +45,11 @@
       class="button button--form button--primary"
       (click)="createClient()"
     >
-      Create
+      Adicionar
     </button>
     <button class="button button--form button--secondary" (click)="closeForm()">
-      Cancel
+      Cancelar
     </button>
   </div>
-  <ngx-spinner><p style="color: white">Loading...</p></ngx-spinner>
+  <ngx-spinner><p style="color: white">Carregando...</p></ngx-spinner>
 </form>
