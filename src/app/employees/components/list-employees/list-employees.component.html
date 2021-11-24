@@ -1,19 +1,19 @@
-<section class="employees">
-  <div class="employees__topbar">
-    <h2>Funcionários</h2>
+<section class="entity__main">
+  <div class="entity__topbar">
+    <h2>{{ 'employees.title' | translate }}</h2>
   </div>
-  <div class="employees__content">
+  <div class="entity__content">
     <div class="actions">
       <input
         class="actions__search"
         type="text"
-        placeholder="Buscar Funcionários..."
+        placeholder="{{ 'employees.actions.search.placeholder' | translate }}"
       />
       <button
         class="button button--primary button--big"
         (click)="openCreateForm()"
       >
-        Adicionar Funcionário
+        {{ 'employees.actions.add_button' | translate }}
       </button>
     </div>
     <div class="content__main">
@@ -25,14 +25,16 @@
         >
           <thead>
             <tr>
-              <th>Nome</th>
-              <th>Empresa</th>
-              <th>Cargo</th>
-              <th>CPF</th>
-              <th>Data de Nascimento</th>
-              <th>Salário</th>
-              <th>Ativo</th>
-              <th>Tipo</th>
+              <th>{{ 'employees.table.header.name' | translate }}</th>
+              <th>{{ 'employees.table.header.client' | translate }}</th>
+              <th>{{ 'employees.table.header.job' | translate }}</th>
+              <th>
+                {{ 'employees.table.header.national_identity' | translate }}
+              </th>
+              <th>{{ 'employees.table.header.birthdate' | translate }}</th>
+              <th>{{ 'employees.table.header.salary' | translate }}</th>
+              <th>{{ 'employees.table.header.active' | translate }}</th>
+              <th>{{ 'employees.table.header.type' | translate }}</th>
             </tr>
           </thead>
           <tbody>
@@ -45,9 +47,9 @@
               <td>{{ employee.jobPosition.name }}</td>
               <td>{{ employee.nationalIdentity }}</td>
               <td>{{ employee.birthdate }}</td>
-              <td>{{ employee.salary | currency: 'BRL':true }}</td>
+              <td>{{ employee.salary | currency: 'BRL':'symbol' }}</td>
               <td>{{ employee.active }}</td>
-              <td>{{ employee.type }}</td>
+              <td>{{ 'employees.type.' + employee.type | translate }}</td>
             </tr>
           </tbody>
         </nz-table>
@@ -55,12 +57,15 @@
         <ng-template #loadingError>
           <div *ngIf="error$ | async; else loading">
             <span>
-              Erro ao carregar lista de funcionários. Tente novamente mais
-              tarde.
+              {{ 'employees.loading.errors.list_loading' | translate }}
             </span>
           </div>
           <ng-template #loading>
-            <ngx-spinner><p style="color: white">Carregando...</p></ngx-spinner>
+            <ngx-spinner
+              ><p style="color: white">
+                {{ 'employees.loading.message' | translate }}
+              </p></ngx-spinner
+            >
           </ng-template>
         </ng-template>
       </div>

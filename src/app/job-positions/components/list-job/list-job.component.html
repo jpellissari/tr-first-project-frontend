@@ -1,19 +1,19 @@
 <section class="entity__main">
   <div class="entity__topbar">
-    <h2>Cargos</h2>
+    <h2>{{ 'jobs.title' | translate }}</h2>
   </div>
   <div class="entity__content">
     <div class="actions">
       <input
         class="actions__search"
         type="text"
-        placeholder="Buscar cargo..."
+        placeholder="{{ 'jobs.actions.search.placeholder' | translate }}"
       />
       <button
         class="button button--primary button--big"
         (click)="openCreateForm()"
       >
-        Adicionar cargo
+        {{ 'jobs.actions.add_button' | translate }}
       </button>
     </div>
     <div class="content__main">
