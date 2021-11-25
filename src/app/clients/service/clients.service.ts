@@ -5,7 +5,7 @@ import { catchError, delay, take } from 'rxjs/operators';
 
 import { Client } from '../models/client';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ClientsService {
   private readonly API = 'http://localhost:8080/clients';
 
