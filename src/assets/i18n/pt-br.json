@@ -42,6 +42,66 @@
       "INTERN": "Estagiário",
       "PARTNER": "Contribuinte"
     },
+    "addEmployee": {
+      "title": "Cadastrar Empregado",
+      "form": {
+        "name": {
+          "label": "Nome",
+          "placeholder": "Nome do empregado",
+          "errors": {
+            "required": "Por favor informe um nome para o empregado.",
+            "minLength": "Nome precisa ter no mínimo {{ requiredLength }} caracteres.",
+            "maxLength": "Nome pode ter no máximo {{ requiredLength }} caracteres."
+          }
+        },
+        "client": {
+          "label": "Cliente",
+          "placeholder": "Pertence ao cliente...",
+          "errors": {
+            "required": "Por favor preencha a qual Cliente pertence o empregado."
+          }
+        },
+        "job": {
+          "label": "Cargo",
+          "placeholder": "Cargo do empregado",
+          "errors": {
+            "required": "Por favor preencha o cargo do empregado."
+          }
+        },
+        "birthdate": {
+          "label": "Data de Nascimento",
+          "errors": {
+            "required": "Por favor preencha a data de nascimento do empregado."
+          }
+        },
+        "nationalIdentity": {
+          "label": "CPF",
+          "placeholder": "CPF do empregado",
+          "error": "Cpf não é válido."
+        },
+        "salary": {
+          "label": "Salário",
+          "placeholder": "Salário do empregado",
+          "errors": {
+            "required": "Por favor preencha o salário do empregado."
+          }
+        },
+        "active": {
+          "label": "Empregado Ativo"
+        },
+        "buttons": {
+          "confirm": "Cadastrar",
+          "cancel": "Cancelar"
+        },
+        "type": {
+          "label": "Tipo do empregado",
+          "placeholder": "Selecione o tipo do empregado."
+        }
+      },
+      "errors": {
+        "conflit": "Empresa selecionada já possui um empregado com este cpf."
+      }
+    },
     "loading": {
       "message": "Carregando...",
       "errors": {
