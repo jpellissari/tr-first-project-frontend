@@ -74,12 +74,12 @@
         style="position: relative"
         *ngIf="sideForm.status"
       >
-        <!-- <app-add-employee
+        <app-add-employee
           *ngIf="sideForm.type === 'create'"
           (formClosedEvent)="closeSideForm()"
           (employeeCreated)="refresh()"
         ></app-add-employee>
-        <app-edit-employee
+        <!--  <app-edit-employee
           *ngIf="sideForm.type === 'update'"
           [employee]="selectedClient"
           (formClosedEvent)="closeSideForm()"
