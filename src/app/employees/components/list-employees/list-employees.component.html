@@ -48,7 +48,20 @@
               <td>{{ employee.nationalIdentity }}</td>
               <td>{{ employee.birthdate | date: 'dd/MM/yyyy' }}</td>
               <td>{{ employee.salary | currency: 'BRL':'symbol' }}</td>
-              <td>{{ employee.active }}</td>
+              <td>
+                <i
+                  *ngIf="employee.active"
+                  nz-icon
+                  nzType="check"
+                  nzTheme="outline"
+                ></i>
+                <i
+                  *ngIf="!employee.active"
+                  nz-icon
+                  nzType="close-circle"
+                  nzTheme="outline"
+                ></i>
+              </td>
               <td>{{ 'employees.type.' + employee.type | translate }}</td>
             </tr>
           </tbody>
