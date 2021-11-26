@@ -102,6 +102,17 @@
         "conflit": "Empresa selecionada já possui um empregado com este cpf."
       }
     },
+    "editEmployee": {
+      "title": "Editar Empregado",
+      "success": "Empregado atualizado com sucesso!",
+      "buttons": {
+        "confirm": "Editar",
+        "cancel": "Cancelar"
+      }
+    },
+    "deleteEmployee": {
+      "success": "Empregado deletado com sucesso"
+    },
     "loading": {
       "message": "Carregando...",
       "errors": {
@@ -117,5 +128,6 @@
       },
       "add_button": "Novo Afastamento"
     }
-  }
+  },
+  "DatePicker.lang.yearPlaceholder": "Teste"
 }

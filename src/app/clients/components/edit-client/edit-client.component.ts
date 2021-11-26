@@ -27,7 +27,6 @@ export class EditClientComponent implements OnInit, OnDestroy, OnChanges {
   submitted: boolean = false;
   form!: FormGroup;
   error$ = new Subject<boolean>();
-  confirmation = false;
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -76,10 +75,6 @@ export class EditClientComponent implements OnInit, OnDestroy, OnChanges {
       );
     }
     this.loading.stop();
-  }
-
-  openConfirmation() {
-    this.confirmation = true;
   }
 
   deleteClient() {
