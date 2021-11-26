@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Observable, Subject, EMPTY } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
+import { parse } from 'date-fns';
+
 import { SideForm } from 'src/app/shared/models/side-form';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
@@ -34,6 +37,14 @@ export class ListEmployeesComponent implements OnInit {
 
     this.employees$ = this.employeesService.list().pipe(
       tap(() => this.loadingService.stop()),
+      map((employees) =>
+        employees.map((apiEmployee) =>
+          Object.assign({} as Employee, {
+            ...apiEmployee,
+            birthdate: parse(apiEmployee.birthdate, 'dd/MM/yyyy', new Date())
+          })
+        )
+      ),
       catchError(() => {
         return this.handleError();
       })
@@ -77,6 +88,7 @@ export class ListEmployeesComponent implements OnInit {
   }
 
   refresh() {
+    this.closeSideForm();
     this.fetchEmployees();
   }
 }
