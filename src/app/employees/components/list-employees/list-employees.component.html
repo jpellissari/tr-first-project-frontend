@@ -46,7 +46,7 @@
               <td>{{ employee.client.name }}</td>
               <td>{{ employee.jobPosition.name }}</td>
               <td>{{ employee.nationalIdentity }}</td>
-              <td>{{ employee.birthdate }}</td>
+              <td>{{ employee.birthdate | date: 'dd/MM/yyyy' }}</td>
               <td>{{ employee.salary | currency: 'BRL':'symbol' }}</td>
               <td>{{ employee.active }}</td>
               <td>{{ 'employees.type.' + employee.type | translate }}</td>
@@ -79,12 +79,12 @@
           (formClosedEvent)="closeSideForm()"
           (employeeCreated)="refresh()"
         ></app-add-employee>
-        <!--  <app-edit-employee
+        <app-edit-employee
           *ngIf="sideForm.type === 'update'"
-          [employee]="selectedClient"
+          [employee]="selectedEmployee"
           (formClosedEvent)="closeSideForm()"
-          (clientUpdated)="refresh()"
-        ></app-edit-employee> -->
+          (employeeUpdatedEvent)="refresh()"
+        ></app-edit-employee>
       </div>
     </div>
   </div>
