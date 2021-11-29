@@ -3,17 +3,10 @@ import { CommonModule } from '@angular/common';
 import { AddLeaveComponent } from './components/add-leave/add-leave.component';
 import { EditLeaveComponent } from './components/edit-leave/edit-leave.component';
 import { ListLeavesComponent } from './components/list-leaves/list-leaves.component';
-
-
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [
-    AddLeaveComponent,
-    EditLeaveComponent,
-    ListLeavesComponent
-  ],
-  imports: [
-    CommonModule
-  ]
+  declarations: [AddLeaveComponent, EditLeaveComponent, ListLeavesComponent],
+  imports: [CommonModule, SharedModule]
 })
-export class LeavesModule { }
+export class LeavesModule {}
