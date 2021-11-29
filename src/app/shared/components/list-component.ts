@@ -14,6 +14,7 @@ export class ListComponent<T> {
   selectedEntity!: T;
   error$ = new Subject<boolean>();
   sideForm!: SideForm;
+  loadingErrorMessage!: string;
 
   constructor(
     private readonly toastService: ToastService,
@@ -25,6 +26,7 @@ export class ListComponent<T> {
   ) {
     this.loadingService.start();
     this.setPageTitle();
+    this.setLoadingErrorMessage();
     this.initSideForm();
     this.fetchEntityList();
   }
@@ -36,11 +38,19 @@ export class ListComponent<T> {
     this.titleService.setTitle(`${environment.title} - ${this.title}`);
   }
 
+  private setLoadingErrorMessage(): void {
+    this.translateService
+      .get('loading.errors.listLoading', {
+        entity: this.title.toLowerCase()
+      })
+      .subscribe((translation) => (this.loadingErrorMessage = translation));
+  }
+
   private fetchEntityList(): void {
     this.entityList$ = this.entityService.list().pipe(
       tap(() => this.loadingService.stop()),
       catchError(() => {
-        return this.handleError();
+        return this.handleError(this.loadingErrorMessage);
       })
     );
   }
@@ -52,12 +62,10 @@ export class ListComponent<T> {
     };
   }
 
-  private handleError() {
+  private handleError(message: string) {
     this.loadingService.stop();
     this.error$.next(true);
-    this.toastService.showErrorMessage(
-      `Erro ao carregar lista de ${this.title}. Tente mais tarde.`
-    );
+    this.toastService.showErrorMessage(message);
     return EMPTY;
   }
 

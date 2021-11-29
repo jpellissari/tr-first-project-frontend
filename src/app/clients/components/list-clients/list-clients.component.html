@@ -45,7 +45,7 @@
         <ng-template #loadingError>
           <div *ngIf="error$ | async; else loading">
             <span>
-              {{ 'loading.errors.listLoading' | translate: { entity: title } }}
+              {{ loadingErrorMessage }}
             </span>
           </div>
           <ng-template #loading>
