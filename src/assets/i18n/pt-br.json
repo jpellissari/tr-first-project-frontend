@@ -1,11 +1,11 @@
 {
   "clients": {
-    "title": "Clientes",
+    "title": "Empresas",
     "actions": {
       "search": {
-        "placeholder": "Buscar Cliente..."
+        "placeholder": "Buscar Empresa..."
       },
-      "add_button": "Novo Cliente"
+      "add_button": "Nova Empresa"
     }
   },
   "jobs": {
@@ -27,8 +27,8 @@
     },
     "table": {
       "header": {
-        "name": "Nome",
-        "client": "Cliente",
+        "name": "Nome do Empregado",
+        "client": "Nome da Empresa",
         "job": "Cargo",
         "national_identity": "CPF",
         "birthdate": "Data de Nascimento",
@@ -55,10 +55,10 @@
           }
         },
         "client": {
-          "label": "Cliente",
-          "placeholder": "Pertence ao cliente...",
+          "label": "Empresa",
+          "placeholder": "Pertence a empresa...",
           "errors": {
-            "required": "Por favor preencha a qual Cliente pertence o empregado."
+            "required": "Por favor preencha a qual Empresa pertence o empregado."
           }
         },
         "job": {
@@ -127,6 +127,32 @@
         "placeholder": "Buscar Afastamento..."
       },
       "add_button": "Novo Afastamento"
+    },
+    "table": {
+      "header": {
+        "client": "Nome da Empresa",
+        "employee": "Nome do Empregado",
+        "leaveType": "Tipo de Afastamento",
+        "leaveDate": "Início do Afastamento",
+        "numberDays": "Dias afastado",
+        "returnDate": "Término do Afastamento",
+        "type": "Tipo"
+      }
+    },
+    "leaveTypes": {
+      "CONTRIBUTORS_DEATH": "Morte",
+      "MATERNITY_LEAVE": "Licença Maternidade",
+      "PATERNITY_LEAVE": "Licença Paternidade",
+      "WORK_INJURY": "Acidente de Trabalho",
+      "VACATION": "Férias",
+      "TERMINATION": "Rescisão",
+      "OTHERS": "Outros"
+    },
+    "types": {
+      "TYPICAL": "Típico",
+      "PROFESSIONAL_DISEASE": "Doença Profissional",
+      "COMMUTING_ACCIDENT": "Trajeto",
+      "null": "-"
     }
   },
   "DatePicker.lang.yearPlaceholder": "Teste"
