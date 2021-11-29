@@ -13,7 +13,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subject } from 'rxjs';
-import { parse } from 'date-fns';
 
 import { Client } from 'src/app/clients/models/client';
 import { ClientsService } from 'src/app/clients/service/clients.service';
@@ -124,9 +123,12 @@ export class EditEmployeeComponent implements OnInit, OnChanges, OnDestroy {
     this.submitted = true;
     this.loading.start();
     if (this.form.valid) {
-      const { id, ...body } = this.form.getRawValue();
-      body.birthdate = this.datePipe.transform(body.birthdate, 'dd/MM/yyyy');
-      this.employeesService.save(body, id).subscribe(
+      const employee = this.form.getRawValue();
+      employee.birthdate = this.datePipe.transform(
+        employee.birthdate,
+        'dd/MM/yyyy'
+      );
+      this.employeesService.update(employee).subscribe(
         (success) => {
           this.translate
             .get('employees.editEmployee.success')
@@ -150,6 +152,7 @@ export class EditEmployeeComponent implements OnInit, OnChanges, OnDestroy {
     this.resetForm();
     this.toastService.showSuccessMessage(message);
     this.employeeUpdatedEvent.emit();
+    this.formClosedEvent.emit();
   }
 
   private handleError(error: any): void {

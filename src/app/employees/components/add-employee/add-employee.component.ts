@@ -15,7 +15,6 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 import { EmployeesService } from '../../services/employees.service';
 import { CpfCnpjValidator } from 'src/app/shared/validators/cpf-cnpj-validator';
 import { DatePipe } from '@angular/common';
-import { EmployeeType } from '../../models/employee';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -119,7 +118,7 @@ export class AddEmployeeComponent implements OnDestroy {
     if (this.form.valid) {
       const body = this.form.value;
       body.birthdate = this.datePipe.transform(body.birthdate, 'dd/MM/yyyy');
-      this.employeesService.save(body).subscribe(
+      this.employeesService.create(body).subscribe(
         (success) => {
           this.handleSuccess();
         },
