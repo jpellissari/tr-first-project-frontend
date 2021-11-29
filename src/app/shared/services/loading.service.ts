@@ -12,7 +12,7 @@ export class LoadingService {
       bdColor: 'rgba(0, 0, 0, 0.1)',
       size: 'medium',
       color: '#fff',
-      type: 'pacman',
+      type: 'ball-spin-clockwise-fade',
       fullScreen: false
     });
   }
