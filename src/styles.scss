@@ -95,19 +95,47 @@ body {
   align-items: flex-start;
   margin-top: 26px;
 
+  .main-table {
+    &__container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      min-height: 370px;
+      padding: 16px;
+      margin-right: 8px;
+      border-radius: 4px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &__content {
+      width: 100%;
+      height: 100%;
+
+      td:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
   .main__table {
     width: 100%;
     min-height: 370px;
     padding: 16px;
     margin-right: 8px;
     position: relative;
-
     border-radius: 4px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 
     td:hover {
       cursor: pointer;
     }
+  }
+}
+
+ngx-spinner {
+  p {
+    margin-top: 80px;
   }
 }
 

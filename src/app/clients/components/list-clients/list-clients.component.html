@@ -17,9 +17,10 @@
       </button>
     </div>
     <div class="content__main">
-      <div class="main__table">
+      <div class="main-table__container">
         <nz-table
-          *ngIf="clients$ | async as clients; else loadingError"
+          class="main-table__content"
+          *ngIf="entityList$ | async as clients; else loadingError"
           #basicTable
           [nzData]="clients"
         >
@@ -32,7 +33,7 @@
             <tr *ngFor="let client of clients" (click)="openUpdateForm(client)">
               <td
                 [class.active]="
-                  selectedClient && selectedClient.id === client.id
+                  selectedEntity && selectedEntity.id === client.id
                 "
               >
                 {{ client.name }}
@@ -44,11 +45,15 @@
         <ng-template #loadingError>
           <div *ngIf="error$ | async; else loading">
             <span>
-              Erro ao carregar lista de clientes. Tente novamente mais tarde.
+              {{ 'loading.errors.listLoading' | translate: { entity: title } }}
             </span>
           </div>
           <ng-template #loading>
-            <ngx-spinner><p style="color: white">Carregando...</p></ngx-spinner>
+            <ngx-spinner
+              ><p style="color: white">
+                {{ 'loading.message' | translate }}
+              </p></ngx-spinner
+            >
           </ng-template>
         </ng-template>
       </div>
@@ -64,7 +69,7 @@
         ></app-add-client>
         <app-edit-client
           *ngIf="sideForm.type === 'update'"
-          [client]="selectedClient"
+          [client]="selectedEntity"
           (formClosedEvent)="closeSideForm()"
           (clientUpdated)="refresh()"
         ></app-edit-client>

@@ -112,12 +112,6 @@
     },
     "deleteEmployee": {
       "success": "Empregado deletado com sucesso"
-    },
-    "loading": {
-      "message": "Carregando...",
-      "errors": {
-        "list_loading": "Erro ao carregar lista de funcionários. Tente novamente mais tarde."
-      }
     }
   },
   "leaves": {
@@ -155,5 +149,10 @@
       "null": "-"
     }
   },
-  "DatePicker.lang.yearPlaceholder": "Teste"
+  "loading": {
+    "message": "Carregando...",
+    "errors": {
+      "listLoading": "Erro ao carregar lista de {{ entity }}. Tente novamente mais tarde."
+    }
+  }
 }
