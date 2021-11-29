@@ -133,6 +133,11 @@ body {
   }
 }
 
+.loading-error__container {
+  display: flex;
+  align-items: center;
+}
+
 ngx-spinner {
   p {
     margin-top: 80px;

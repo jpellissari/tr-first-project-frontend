@@ -43,7 +43,10 @@
         </nz-table>
 
         <ng-template #loadingError>
-          <div *ngIf="error$ | async; else loading">
+          <div
+            class="loading-error__container"
+            *ngIf="error$ | async; else loading"
+          >
             <span>
               {{ loadingErrorMessage }}
             </span>
