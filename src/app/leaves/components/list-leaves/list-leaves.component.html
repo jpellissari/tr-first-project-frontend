@@ -1,1 +1,86 @@
-<p>list-leaves works!</p>
+<section class="entity__main">
+  <div class="entity__topbar">
+    <h2>{{ 'leaves.title' | translate }}</h2>
+  </div>
+  <div class="entity__content">
+    <div class="actions">
+      <input
+        class="actions__search"
+        type="text"
+        placeholder="{{ 'leaves.actions.search.placeholder' | translate }}"
+      />
+      <button
+        class="button button--primary button--big"
+        (click)="openCreateForm()"
+      >
+        {{ 'leaves.actions.add_button' | translate }}
+      </button>
+    </div>
+    <div class="content__main">
+      <div class="main__table" style="position: relative">
+        <nz-table
+          *ngIf="leaves$ | async as leaves; else loadingError"
+          #basicTable
+          [nzData]="leaves"
+        >
+          <thead>
+            <tr>
+              <th>{{ 'leaves.table.header.client' | translate }}</th>
+              <th>{{ 'leaves.table.header.employee' | translate }}</th>
+              <th>
+                {{ 'leaves.table.header.leaveType' | translate }}
+              </th>
+              <th>{{ 'leaves.table.header.leaveDate' | translate }}</th>
+              <th>{{ 'leaves.table.header.numberDays' | translate }}</th>
+              <th>{{ 'leaves.table.header.returnDate' | translate }}</th>
+              <th>{{ 'leaves.table.header.type' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let leave of leaves" (click)="openUpdateForm(leave)">
+              <td>{{ leave.client.name }}</td>
+              <td>{{ leave.employee.name }}</td>
+              <td>{{ 'leaves.leaveTypes.' + leave.leaveType | translate }}</td>
+              <td>{{ leave.leaveDate | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ leave.numberDays || '-' }}</td>
+              <td>{{ leave.returnDate || '-' }}</td>
+              <td>{{ 'leaves.types.' + leave.type | translate }}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+
+        <ng-template #loadingError>
+          <div *ngIf="error$ | async; else loading">
+            <span>
+              {{ 'leaves.loading.errors.list_loading' | translate }}
+            </span>
+          </div>
+          <ng-template #loading>
+            <ngx-spinner
+              ><p style="color: white">
+                {{ 'leaves.loading.message' | translate }}
+              </p></ngx-spinner
+            >
+          </ng-template>
+        </ng-template>
+      </div>
+      <div
+        class="content__form"
+        style="position: relative"
+        *ngIf="sideForm.status"
+      >
+        <!-- <app-add-leave
+          *ngIf="sideForm.type === 'create'"
+          (formClosedEvent)="closeSideForm()"
+          (leaveCreated)="refresh()"
+        ></app-add-leave>
+        <app-edit-leave
+          *ngIf="sideForm.type === 'update'"
+          [leave]="selectedLeave"
+          (formClosedEvent)="closeSideForm()"
+          (leaveUpdatedEvent)="refresh()"
+        ></app-edit-leave> -->
+      </div>
+    </div>
+  </div>
+</section>
