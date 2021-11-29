@@ -17,9 +17,10 @@
       </button>
     </div>
     <div class="content__main">
-      <div class="main__table" style="position: relative">
+      <div class="main-table__container">
         <nz-table
-          *ngIf="employees$ | async as employees; else loadingError"
+          class="main-table__content"
+          *ngIf="entityList$ | async as employees; else loadingError"
           #basicTable
           [nzData]="employees"
         >
@@ -70,13 +71,13 @@
         <ng-template #loadingError>
           <div *ngIf="error$ | async; else loading">
             <span>
-              {{ 'employees.loading.errors.list_loading' | translate }}
+              {{ loadingErrorMessage }}
             </span>
           </div>
           <ng-template #loading>
             <ngx-spinner
               ><p style="color: white">
-                {{ 'employees.loading.message' | translate }}
+                {{ 'loading.message' | translate }}
               </p></ngx-spinner
             >
           </ng-template>
@@ -94,7 +95,7 @@
         ></app-add-employee>
         <app-edit-employee
           *ngIf="sideForm.type === 'update'"
-          [employee]="selectedEmployee"
+          [employee]="selectedEntity"
           (formClosedEvent)="closeSideForm()"
           (employeeUpdatedEvent)="refresh()"
         ></app-edit-employee>

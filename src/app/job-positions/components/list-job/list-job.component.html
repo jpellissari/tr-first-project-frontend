@@ -17,9 +17,10 @@
       </button>
     </div>
     <div class="content__main">
-      <div class="main__table" style="position: relative">
+      <div class="main-table__container">
         <nz-table
-          *ngIf="jobs$ | async as jobs; else loadingError"
+          class="main-table__content"
+          *ngIf="entityList$ | async as jobs; else loadingError"
           #basicTable
           [nzData]="jobs"
         >
@@ -36,13 +37,20 @@
         </nz-table>
 
         <ng-template #loadingError>
-          <div *ngIf="error$ | async; else loading">
+          <div
+            class="loading-error__container"
+            *ngIf="error$ | async; else loading"
+          >
             <span>
-              Erro ao carregar lista de cargos. Tente novamente mais tarde.
+              {{ loadingErrorMessage }}
             </span>
           </div>
           <ng-template #loading>
-            <ngx-spinner><p style="color: white">Loading...</p></ngx-spinner>
+            <ngx-spinner
+              ><p style="color: white">
+                {{ 'loading.message' | translate }}
+              </p></ngx-spinner
+            >
           </ng-template>
         </ng-template>
       </div>
@@ -58,7 +66,7 @@
         ></app-add-job>
         <app-edit-job
           *ngIf="sideForm.type === 'update'"
-          [job]="selectedJob"
+          [job]="selectedEntity"
           (formClosedEvent)="closeSideForm()"
           (jobUpdated)="refresh()"
         ></app-edit-job>

@@ -4,7 +4,7 @@ import { EMPTY, Observable, Subject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { SideForm } from '../models/side-form';
-import { BaseCrudService } from '../services/base-crud.service';
+import { ListEntityService } from '../services/list-entity.service';
 import { LoadingService } from '../services/loading.service';
 import { ToastService } from '../services/toast.service';
 
@@ -19,7 +19,7 @@ export class ListComponent<T> {
   constructor(
     private readonly toastService: ToastService,
     private readonly loadingService: LoadingService,
-    private readonly entityService: BaseCrudService<T>,
+    private readonly listEntityService: ListEntityService<T>,
     private readonly translateService: TranslateService,
     private readonly titleService: Title,
     private readonly entityName: string
@@ -47,7 +47,7 @@ export class ListComponent<T> {
   }
 
   private fetchEntityList(): void {
-    this.entityList$ = this.entityService.list().pipe(
+    this.entityList$ = this.listEntityService.list().pipe(
       tap(() => this.loadingService.stop()),
       catchError(() => {
         return this.handleError(this.loadingErrorMessage);

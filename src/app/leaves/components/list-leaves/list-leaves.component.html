@@ -1,6 +1,6 @@
 <section class="entity__main">
   <div class="entity__topbar">
-    <h2>{{ 'leaves.title' | translate }}</h2>
+    <h2>{{ title }}</h2>
   </div>
   <div class="entity__content">
     <div class="actions">
@@ -17,9 +17,10 @@
       </button>
     </div>
     <div class="content__main">
-      <div class="main__table" style="position: relative">
+      <div class="main-table__container">
         <nz-table
-          *ngIf="leaves$ | async as leaves; else loadingError"
+          class="main-table__content"
+          *ngIf="entityList$ | async as leaves; else loadingError"
           #basicTable
           [nzData]="leaves"
         >
@@ -51,14 +52,14 @@
 
         <ng-template #loadingError>
           <div *ngIf="error$ | async; else loading">
-            <span>
-              {{ 'leaves.loading.errors.list_loading' | translate }}
-            </span>
+            <span>{{
+              'loading.errors.listLoading' | translate: { entity: title }
+            }}</span>
           </div>
           <ng-template #loading>
             <ngx-spinner
               ><p style="color: white">
-                {{ 'leaves.loading.message' | translate }}
+                {{ 'loading.message' | translate }}
               </p></ngx-spinner
             >
           </ng-template>
