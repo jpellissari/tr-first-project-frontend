@@ -52,7 +52,7 @@ export class AddClientComponent implements OnDestroy {
     this.submitted = true;
     this.loading.start();
     if (this.form.valid) {
-      this.clientsService.save(this.form.value).subscribe(
+      this.clientsService.create(this.form.value.name).subscribe(
         (success) => {
           this.handleSuccess();
         },

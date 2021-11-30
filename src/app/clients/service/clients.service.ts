@@ -1,13 +1,43 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BaseCrudService } from 'src/app/shared/services/base-crud.service';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { AddEntityService } from 'src/app/shared/services/add-entity.service';
+import { DeleteEntityService } from 'src/app/shared/services/delete-entity.service';
+import { EditEntityService } from 'src/app/shared/services/edit-entity.service';
+import { ListEntityService } from 'src/app/shared/services/list-entity.service';
 import { environment } from 'src/environments/environment';
 
 import { Client } from '../models/client';
 
 @Injectable({ providedIn: 'root' })
-export class ClientsService extends BaseCrudService<Client> {
-  constructor(http: HttpClient) {
-    super(http, `${environment.api.baseUrl}/clients`);
+export class ClientsService
+  implements
+    ListEntityService<Client>,
+    AddEntityService<Client>,
+    EditEntityService<Client>,
+    DeleteEntityService
+{
+  private API_URL: string;
+
+  constructor(private readonly http: HttpClient) {
+    this.API_URL = `${environment.api.baseUrl}/clients`;
+  }
+
+  list(): Observable<Client[]> {
+    return this.http.get<Client[]>(this.API_URL);
+  }
+
+  create(client: Client): Observable<Object> {
+    return this.http.post(this.API_URL, client).pipe(take(1));
+  }
+
+  update(client: Client): Observable<Object> {
+    const { id, ...data } = client;
+    return this.http.post(`${this.API_URL}/${id}`, data).pipe(take(1));
+  }
+
+  delete(id: string): Observable<Object> {
+    return this.http.delete(`${this.API_URL}/${id}`).pipe(take(1));
   }
 }

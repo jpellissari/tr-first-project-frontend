@@ -65,8 +65,8 @@ export class EditClientComponent implements OnInit, OnDestroy, OnChanges {
     this.submitted = true;
     this.loading.start();
     if (this.form.valid) {
-      const { name, id } = this.form.getRawValue();
-      this.clientsService.save({ name }, id).subscribe(
+      const client = this.form.getRawValue();
+      this.clientsService.update(client).subscribe(
         (success) => {
           this.handleSuccess('Client Updated!');
         },
