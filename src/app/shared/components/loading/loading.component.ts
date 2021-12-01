@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./loading.component.scss']
 })
 export class LoadingComponent {
+  @Input() withError: boolean = false;
   @Input() error$: Observable<boolean> = of(false);
   @Input() errorMessage: string = '';
 }

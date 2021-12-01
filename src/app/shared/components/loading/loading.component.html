@@ -1,12 +1,21 @@
-<div class="loading-error__container" *ngIf="error$ | async; else loading">
-  <span>
-    {{ errorMessage }}
-  </span>
+<div *ngIf="withError">
+  <div *ngIf="error$ | async; else loading">
+    <span>
+      {{ errorMessage }}
+    </span>
+  </div>
+  <ng-template #loading>
+    <ngx-spinner>
+      <p style="color: white">
+        {{ 'loading.message' | translate }}
+      </p>
+    </ngx-spinner>
+  </ng-template>
 </div>
-<ng-template #loading>
-  <ngx-spinner
-    ><p style="color: white">
+<div *ngIf="!withError">
+  <ngx-spinner>
+    <p style="color: white">
       {{ 'loading.message' | translate }}
-    </p></ngx-spinner
-  >
-</ng-template>
+    </p>
+  </ngx-spinner>
+</div>
