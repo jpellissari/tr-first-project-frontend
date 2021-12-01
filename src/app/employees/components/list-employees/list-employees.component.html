@@ -1,7 +1,5 @@
 <section class="entity__main">
-  <div class="entity__topbar">
-    <h2>{{ 'employees.title' | translate }}</h2>
-  </div>
+  <app-topbar title="{{ 'employees.title' | translate }}"></app-topbar>
   <div class="entity__content">
     <div class="actions">
       <input
@@ -20,7 +18,7 @@
       <div class="main-table__container">
         <nz-table
           class="main-table__content"
-          *ngIf="entityList$ | async as employees; else loadingError"
+          *ngIf="entityList$ | async as employees; else loading"
           #basicTable
           [nzData]="employees"
         >
@@ -68,19 +66,11 @@
           </tbody>
         </nz-table>
 
-        <ng-template #loadingError>
-          <div *ngIf="error$ | async; else loading">
-            <span>
-              {{ loadingErrorMessage }}
-            </span>
-          </div>
-          <ng-template #loading>
-            <ngx-spinner
-              ><p style="color: white">
-                {{ 'loading.message' | translate }}
-              </p></ngx-spinner
-            >
-          </ng-template>
+        <ng-template #loading>
+          <app-loading
+            [error$]="error$"
+            [errorMessage]="loadingErrorMessage"
+          ></app-loading>
         </ng-template>
       </div>
       <div
