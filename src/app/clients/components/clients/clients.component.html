@@ -1,0 +1,52 @@
+<section class="entity__main">
+  <app-topbar title="{{ 'clients.title' | translate }}"></app-topbar>
+  <div class="entity__content">
+    <div class="actions">
+      <input
+        class="actions__search"
+        type="text"
+        placeholder="{{ 'clients.actions.search.placeholder' | translate }}"
+      />
+      <button
+        class="button button--primary button--big"
+        (click)="openCreateForm()"
+      >
+        {{ 'clients.actions.add_button' | translate }}
+      </button>
+    </div>
+    <div class="content__main">
+      <div class="main-table__container">
+        <app-list-clients
+          class="main-table__content"
+          *ngIf="entityList$ | async as clients; else loading"
+          [clients]="clients"
+        ></app-list-clients>
+
+        <ng-template #loading>
+          <app-loading
+            [withError]="true"
+            [error$]="error$"
+            [errorMessage]="loadingErrorMessage"
+          ></app-loading>
+        </ng-template>
+      </div>
+      <div
+        class="content__form"
+        style="position: relative"
+        *ngIf="sideForm.status"
+      >
+        <app-add-client
+          *ngIf="sideForm.type === 'create'"
+          (formClosedEvent)="closeSideForm()"
+          (clientCreated)="refresh()"
+        ></app-add-client>
+        <app-edit-client
+          *ngIf="sideForm.type === 'update'"
+          [client]="selectedEntity"
+          (formClosedEvent)="closeSideForm()"
+          (clientUpdated)="refresh()"
+        ></app-edit-client>
+      </div>
+    </div>
+  </div>
+</section>

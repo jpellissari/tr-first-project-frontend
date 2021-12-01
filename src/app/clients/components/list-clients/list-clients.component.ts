@@ -1,34 +1,17 @@
-import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-
-import { TranslateService } from '@ngx-translate/core';
-
-import { ToastService } from 'src/app/shared/services/toast.service';
-import { LoadingService } from 'src/app/shared/services/loading.service';
-import { ListComponent } from 'src/app/shared/components/list-component';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Client } from '../../models/client';
-import { ClientsService } from '../../service/clients.service';
 
 @Component({
   selector: 'app-list-clients',
   templateUrl: './list-clients.component.html',
   styleUrls: ['./list-clients.component.scss']
 })
-export class ListClientsComponent extends ListComponent<Client> {
-  constructor(
-    clientsService: ClientsService,
-    toastService: ToastService,
-    loadingService: LoadingService,
-    translateService: TranslateService,
-    titleService: Title
-  ) {
-    super(
-      toastService,
-      loadingService,
-      clientsService,
-      translateService,
-      titleService,
-      'clients'
-    );
+export class ListClientsComponent {
+  @Input() clients: Client[];
+  @Output() showClient: EventEmitter<Client>;
+
+  constructor() {
+    this.clients = [];
+    this.showClient = new EventEmitter<Client>();
   }
 }

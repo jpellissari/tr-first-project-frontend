@@ -1,82 +1,14 @@
-<section class="entity__main">
-  <div class="entity__topbar">
-    <h2>{{ 'clients.title' | translate }}</h2>
-  </div>
-  <div class="entity__content">
-    <div class="actions">
-      <input
-        class="actions__search"
-        type="text"
-        placeholder="{{ 'clients.actions.search.placeholder' | translate }}"
-      />
-      <button
-        class="button button--primary button--big"
-        (click)="openCreateForm()"
-      >
-        {{ 'clients.actions.add_button' | translate }}
-      </button>
-    </div>
-    <div class="content__main">
-      <div class="main-table__container">
-        <nz-table
-          class="main-table__content"
-          *ngIf="entityList$ | async as clients; else loadingError"
-          #basicTable
-          [nzData]="clients"
-        >
-          <thead>
-            <tr>
-              <th>Nome</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let client of clients" (click)="openUpdateForm(client)">
-              <td
-                [class.active]="
-                  selectedEntity && selectedEntity.id === client.id
-                "
-              >
-                {{ client.name }}
-              </td>
-            </tr>
-          </tbody>
-        </nz-table>
-
-        <ng-template #loadingError>
-          <div
-            class="loading-error__container"
-            *ngIf="error$ | async; else loading"
-          >
-            <span>
-              {{ loadingErrorMessage }}
-            </span>
-          </div>
-          <ng-template #loading>
-            <ngx-spinner
-              ><p style="color: white">
-                {{ 'loading.message' | translate }}
-              </p></ngx-spinner
-            >
-          </ng-template>
-        </ng-template>
-      </div>
-      <div
-        class="content__form"
-        style="position: relative"
-        *ngIf="sideForm.status"
-      >
-        <app-add-client
-          *ngIf="sideForm.type === 'create'"
-          (formClosedEvent)="closeSideForm()"
-          (clientCreated)="refresh()"
-        ></app-add-client>
-        <app-edit-client
-          *ngIf="sideForm.type === 'update'"
-          [client]="selectedEntity"
-          (formClosedEvent)="closeSideForm()"
-          (clientUpdated)="refresh()"
-        ></app-edit-client>
-      </div>
-    </div>
-  </div>
-</section>
+<nz-table [nzData]="clients">
+  <thead>
+    <tr>
+      <th>Nome</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let client of clients" (click)="showClient.emit(client)">
+      <td>
+        {{ client.name }}
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

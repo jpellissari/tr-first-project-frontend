@@ -21,7 +21,7 @@ export class AddClientComponent implements OnDestroy {
     private readonly formBuilder: FormBuilder,
     private readonly clientsService: ClientsService,
     private readonly toastService: ToastService,
-    private readonly loading: LoadingService
+    private readonly loadingService: LoadingService
   ) {
     this.form = this.createForm();
   }
@@ -50,8 +50,8 @@ export class AddClientComponent implements OnDestroy {
 
   createClient() {
     this.submitted = true;
-    this.loading.start();
     if (this.form.valid) {
+      this.loadingService.start();
       this.clientsService.create(this.form.value.name).subscribe(
         (success) => {
           this.handleSuccess();
@@ -61,11 +61,10 @@ export class AddClientComponent implements OnDestroy {
         }
       );
     }
-    this.loading.stop();
   }
 
   private resetForm(): void {
-    this.loading.stop();
+    this.loadingService.stop();
     this.submitted = false;
     this.form.reset();
   }
@@ -78,7 +77,7 @@ export class AddClientComponent implements OnDestroy {
 
   private handleError(error: any): void {
     this.error$.next(true);
-    this.loading.stop();
+    this.loadingService.stop();
     this.toastService.showErrorMessage(error);
   }
 }

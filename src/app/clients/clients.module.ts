@@ -6,9 +6,15 @@ import { ListClientsComponent } from './components/list-clients/list-clients.com
 import { AddClientComponent } from './components/add-client/add-client.component';
 import { EditClientComponent } from './components/edit-client/edit-client.component';
 import { SharedModule } from '../shared/shared.module';
+import { ClientsComponent } from './components/clients/clients.component';
 
 @NgModule({
-  declarations: [ListClientsComponent, AddClientComponent, EditClientComponent],
+  declarations: [
+    ListClientsComponent,
+    AddClientComponent,
+    EditClientComponent,
+    ClientsComponent
+  ],
   imports: [CommonModule, ClientsRoutingModule, SharedModule]
 })
 export class ClientsModule {}
