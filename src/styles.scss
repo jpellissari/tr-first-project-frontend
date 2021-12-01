@@ -65,13 +65,6 @@ body {
 
 .entity__topbar {
   grid-area: topbar;
-
-  h2 {
-    display: block;
-    width: 100%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-    padding-bottom: 26px;
-  }
 }
 
 .entity__content {

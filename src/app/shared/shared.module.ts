@@ -7,9 +7,10 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { LoadingComponent } from './components/loading/loading.component';
+import { TopbarComponent } from './components/topbar/topbar.component';
 
 @NgModule({
-  declarations: [LoadingComponent],
+  declarations: [LoadingComponent, TopbarComponent],
   imports: [CommonModule, TranslateModule, NgxSpinnerModule],
   exports: [
     TranslateModule,
@@ -18,7 +19,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     NzTableModule,
     NzPopconfirmModule,
     NzIconModule,
-    LoadingComponent
+    LoadingComponent,
+    TopbarComponent
   ]
 })
 export class SharedModule {}
