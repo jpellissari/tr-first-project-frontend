@@ -8,6 +8,9 @@
       "add_button": "Nova Empresa"
     },
     "form": {
+      "id": {
+        "label": "ID"
+      },
       "name": {
         "label": "Nome",
         "placeholder": "Nome da Empresa"
