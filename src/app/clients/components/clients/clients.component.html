@@ -17,6 +17,7 @@
     <div class="content__main">
       <div class="main-table__container">
         <app-list-clients
+          (showClient)="openUpdateForm($event)"
           class="main-table__content"
           *ngIf="entityList$ | async as clients; else loading"
           [clients]="clients"
