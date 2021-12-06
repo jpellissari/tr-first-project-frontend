@@ -1,14 +1,6 @@
 import { Client } from 'src/app/clients/models/client';
 import { LeaveType } from './leave-type';
-
-type Type =
-  | 'contributors_death'
-  | 'maternity_leave'
-  | 'paternity_leave'
-  | 'work_injury'
-  | 'vacation'
-  | 'termination'
-  | 'others';
+import { Type } from './type';
 
 type SimplifiedEmployee = {
   id: string;

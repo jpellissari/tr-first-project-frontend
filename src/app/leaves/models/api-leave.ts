@@ -1,15 +1,7 @@
 import { Client } from 'src/app/clients/models/client';
 import { ApiEmployee } from 'src/app/employees/models/api-employee';
 import { LeaveType } from './leave-type';
-
-type Type =
-  | 'CONTRIBUTORS_DEATH'
-  | 'MATERNITY_LEAVE'
-  | 'PATERNITY_LEAVE'
-  | 'WORK_INJURY'
-  | 'VACATION'
-  | 'TERMINATION'
-  | 'OTHERS';
+import { Type } from './type';
 
 export interface ApiLeave {
   id: string;
