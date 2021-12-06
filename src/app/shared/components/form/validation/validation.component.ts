@@ -4,7 +4,7 @@ import {
   OnChanges,
   Input
 } from '@angular/core';
-import { ValidationError } from '../../../forms/validation-errors';
+import { ValidationError } from '../../../errors/validation-errors/validation-error';
 
 @Component({
   selector: 'app-validation',

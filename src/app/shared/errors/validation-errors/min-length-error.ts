@@ -1,8 +1,8 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { ValidationError } from './validation-errors';
+import { ValidationError } from './validation-error';
 
-export class MaxLengthError implements ValidationError {
+export class MinLengthError implements ValidationError {
   private field: string;
   private requiredLength: number;
 
@@ -16,7 +16,7 @@ export class MaxLengthError implements ValidationError {
   }
 
   buildMessage(): Observable<string> {
-    return this.translateService.get('form.errors.maxLength', {
+    return this.translateService.get('form.errors.minLength', {
       field: this.field,
       requiredLength: this.requiredLength
     });

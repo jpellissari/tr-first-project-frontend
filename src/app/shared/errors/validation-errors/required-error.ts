@@ -1,6 +1,6 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { ValidationError } from './validation-errors';
+import { ValidationError } from './validation-error';
 
 export class RequiredFieldError implements ValidationError {
   private field: string;
