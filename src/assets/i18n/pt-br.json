@@ -6,6 +6,12 @@
         "placeholder": "Buscar Empresa..."
       },
       "add_button": "Nova Empresa"
+    },
+    "form": {
+      "name": {
+        "label": "Nome",
+        "placeholder": "Nome da Empresa"
+      }
     }
   },
   "jobs": {
