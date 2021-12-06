@@ -41,8 +41,12 @@ export class EmployeesService
     return this.http.post(this.API_URL, employee).pipe(take(1));
   }
 
-  list(): Observable<Employee[]> {
-    return this.http.get<ApiEmployee[]>(this.API_URL).pipe(
+  list(client?: string): Observable<Employee[]> {
+    let query = '';
+    if (client) {
+      query = `?client=${client}`;
+    }
+    return this.http.get<ApiEmployee[]>(`${this.API_URL}${query}`).pipe(
       map((employees) =>
         employees.map((apiEmployee) =>
           Object.assign({} as Employee, {
