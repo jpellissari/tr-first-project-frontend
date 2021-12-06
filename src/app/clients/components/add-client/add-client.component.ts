@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { NewClient } from '../../models/new-client';
 import { ClientsService } from '../../service/clients.service';
 
 @Component({
@@ -12,7 +13,6 @@ import { ClientsService } from '../../service/clients.service';
 export class AddClientComponent implements OnDestroy {
   @Output() formClosedEvent = new EventEmitter<void>();
   @Output() clientCreated = new EventEmitter<void>();
-  submitted: boolean = false;
   form: FormGroup;
   error$ = new Subject<boolean>();
 
@@ -43,15 +43,11 @@ export class AddClientComponent implements OnDestroy {
     this.formClosedEvent.emit();
   }
 
-  hasError(field: string) {
-    return this.form.get(field)?.errors;
-  }
-
   createClient() {
-    this.submitted = true;
     if (this.form.valid) {
       this.loadingService.start();
-      this.clientsService.create(this.form.value.name).subscribe(
+      const client = NewClient.create(this.form.value.name);
+      this.clientsService.create(client).subscribe(
         (success) => {
           this.handleSuccess();
         },
@@ -64,7 +60,6 @@ export class AddClientComponent implements OnDestroy {
 
   private resetForm(): void {
     this.loadingService.stop();
-    this.submitted = false;
     this.form.reset();
   }
 
