@@ -1,10 +1,10 @@
 import { Component, DoCheck, Input } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { MaxLengthError } from '../max-length-error';
-import { MinLengthError } from '../min-length-error';
-import { RequiredFieldError } from '../required-error';
-import { ValidationError } from '../validation-errors';
+import { MaxLengthError } from '../../../forms/max-length-error';
+import { MinLengthError } from '../../../forms/min-length-error';
+import { RequiredFieldError } from '../../../forms/required-error';
+import { ValidationError } from '../../../forms/validation-errors';
 
 @Component({
   selector: 'app-input',
