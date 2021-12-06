@@ -17,8 +17,7 @@ import { ClientsService } from '../../service/clients.service';
 
 @Component({
   selector: 'app-edit-client',
-  templateUrl: './edit-client.component.html',
-  styleUrls: ['./edit-client.component.scss']
+  templateUrl: './edit-client.component.html'
 })
 export class EditClientComponent implements OnInit, OnDestroy, OnChanges {
   @Input() client!: Client;

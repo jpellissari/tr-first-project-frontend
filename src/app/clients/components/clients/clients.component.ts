@@ -11,8 +11,7 @@ import { ClientsService } from '../../service/clients.service';
 
 @Component({
   selector: 'app-clients',
-  templateUrl: './clients.component.html',
-  styleUrls: ['./clients.component.scss']
+  templateUrl: './clients.component.html'
 })
 export class ClientsComponent extends ListComponent<Client> {
   constructor(

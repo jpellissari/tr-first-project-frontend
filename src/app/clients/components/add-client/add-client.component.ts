@@ -7,8 +7,7 @@ import { ClientsService } from '../../service/clients.service';
 
 @Component({
   selector: 'app-add-client',
-  templateUrl: './add-client.component.html',
-  styleUrls: ['./add-client.component.scss']
+  templateUrl: './add-client.component.html'
 })
 export class AddClientComponent implements OnDestroy {
   @Output() formClosedEvent = new EventEmitter<void>();
