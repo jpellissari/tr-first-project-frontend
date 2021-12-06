@@ -1,0 +1,10 @@
+.form-field {
+  &__error {
+    color: red;
+    font-size: 12px;
+
+    span {
+      margin-top: 0px;
+    }
+  }
+}
