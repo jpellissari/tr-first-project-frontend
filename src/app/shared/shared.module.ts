@@ -8,10 +8,22 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { LoadingComponent } from './components/loading/loading.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
+import { InputComponent } from './forms/input/input.component';
+import { ValidationComponent } from './forms/validation/validation.component';
 
 @NgModule({
-  declarations: [LoadingComponent, TopbarComponent],
-  imports: [CommonModule, TranslateModule, NgxSpinnerModule],
+  declarations: [
+    LoadingComponent,
+    TopbarComponent,
+    InputComponent,
+    ValidationComponent
+  ],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    NgxSpinnerModule,
+    ReactiveFormsModule
+  ],
   exports: [
     TranslateModule,
     ReactiveFormsModule,
@@ -20,7 +32,9 @@ import { TopbarComponent } from './components/topbar/topbar.component';
     NzPopconfirmModule,
     NzIconModule,
     LoadingComponent,
-    TopbarComponent
+    TopbarComponent,
+    InputComponent,
+    ValidationComponent
   ]
 })
 export class SharedModule {}
