@@ -1,1 +1,222 @@
-<p>add-leave works!</p>
+<form class="form" novalidate [formGroup]="form">
+  <h2 class="form__title">{{ 'leaves.addLeave.title' | translate }}</h2>
+
+  <div
+    class="form-field"
+    [ngClass]="{ 'is-invalid': submitted && hasError('clientId') }"
+  >
+    <label for="leave-client" class="form-field__label">{{
+      'leaves.addLeave.form.client.label' | translate
+    }}</label>
+    <nz-select
+      id="leave-client"
+      nzShowSearch
+      nzPlaceHolder="{{
+        'leaves.addLeave.form.client.placeholder' | translate
+      }}"
+      formControlName="clientId"
+      (nzOnSearch)="searchClient($event)"
+      (ngModelChange)="onClientChange($event)"
+    >
+      <nz-option
+        *ngFor="let client of clients$ | async"
+        [nzLabel]="client.name"
+        [nzValue]="client.id"
+      ></nz-option>
+    </nz-select>
+    <div
+      class="form-field__error"
+      *ngIf="submitted && hasError('clientId')?.required"
+    >
+      <p>
+        {{ 'leaves.addLeave.form.client.errors.required' | translate }}
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="form-field form-field__with-loading"
+    [ngClass]="{ 'is-invalid': submitted && hasError('employee') }"
+    *ngIf="form.value.clientId"
+  >
+    <label for="leave-employee" class="form-field__label">{{
+      'leaves.addLeave.form.employee.label' | translate
+    }}</label>
+    <nz-select
+      id="leave-employee"
+      nzShowSearch
+      nzPlaceHolder="{{
+        'leaves.addLeave.form.employee.placeholder' | translate
+      }}"
+      formControlName="employee"
+      (nzOnSearch)="searchEmployee($event)"
+    >
+      <nz-option
+        *ngFor="let employee of employees$ | async"
+        [nzLabel]="employee.name"
+        [nzValue]="employee"
+      ></nz-option>
+    </nz-select>
+
+    <div
+      class="form-field__error"
+      *ngIf="submitted && hasError('employee')?.required"
+    >
+      <p>
+        {{ 'leaves.addLeave.form.employee.errors.required' | translate }}
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="form-field"
+    [ngClass]="{ 'is-invalid': submitted && hasError('leaveDate') }"
+  >
+    <label for="leave-leaveDate" class="form-field__label">{{
+      'leaves.addLeave.form.leaveDate.label' | translate
+    }}</label>
+    <nz-date-picker
+      id="leave-leaveDate"
+      formControlName="leaveDate"
+      nzFormat="dd/MM/yyyy"
+      (ngModelChange)="onLeaveDateChange($event)"
+    ></nz-date-picker>
+
+    <div
+      class="form-field__error"
+      *ngIf="submitted && hasError('leaveDate')?.required"
+    >
+      <p>
+        {{ 'leaves.addLeave.form.leaveDate.errors.required' | translate }}
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="form-field"
+    [ngClass]="{ 'is-invalid': submitted && hasError('leaveType') }"
+    *ngIf="isFieldVisible.leaveType"
+  >
+    <label for="leave-leave-type" class="form-field__label">{{
+      'leaves.addLeave.form.leaveType.label' | translate
+    }}</label>
+    <nz-select
+      id="leave-leave-type"
+      nzShowSearch
+      nzPlaceHolder="{{
+        'leaves.addLeave.form.leaveType.placeholder' | translate
+      }}"
+      formControlName="leaveType"
+      (ngModelChange)="onLeaveTypeChange($event)"
+    >
+      <nz-option
+        *ngFor="let lType of leaveTypes"
+        [nzValue]="lType"
+        nzLabel="{{ 'leaves.leaveTypes.' + lType.type | translate }}"
+      ></nz-option>
+    </nz-select>
+
+    <div
+      class="form-field__error"
+      *ngIf="submitted && hasError('leaveType')?.required"
+    >
+      <p>
+        {{ 'leaves.addLeave.form.leaveType.errors.required' | translate }}
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="form-field"
+    [ngClass]="{ 'is-invalid': submitted && hasError('numberDays') }"
+    *ngIf="isFieldVisible.numberDays"
+  >
+    <label for="leave-numberDays" class="form-field__label">{{
+      'leaves.addLeave.form.numberDays.label' | translate
+    }}</label>
+    <input
+      class="form-field__input"
+      id="leave-numberDays"
+      type="number"
+      placeholder="{{
+        'leaves.addLeave.form.numberDays.placeholder' | translate
+      }}"
+      formControlName="numberDays"
+      (ngModelChange)="onNumberOfDaysChange($event)"
+    />
+    <div
+      class="form-field__error"
+      *ngIf="submitted && hasError('numberDays')?.required"
+    >
+      <p>
+        {{ 'leaves.addLeave.form.numberDays.errors.required' | translate }}
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="form-field"
+    [ngClass]="{ 'is-invalid': submitted && hasError('returnDate') }"
+    *ngIf="isFieldVisible.returnDate"
+  >
+    <label for="leave-returnDate" class="form-field__label">{{
+      'leaves.addLeave.form.returnDate.label' | translate
+    }}</label>
+    <nz-date-picker
+      id="leave-returnDate"
+      nzFormat="dd/MM/yyyy"
+      formControlName="returnDate"
+    ></nz-date-picker>
+  </div>
+
+  <div
+    class="form-field form-field__with-loading"
+    [ngClass]="{ 'is-invalid': submitted && hasError('employeeId') }"
+    *ngIf="isFieldVisible.type"
+  >
+    <label for="leave-type" class="form-field__label">{{
+      'leaves.addLeave.form.type.label' | translate
+    }}</label>
+    <nz-select
+      id="leave-type"
+      nzPlaceHolder="{{ 'leaves.addLeave.form.type.placeholder' | translate }}"
+      formControlName="type"
+    >
+      <nz-option
+        *ngFor="let type of types"
+        nzLabel="{{ 'leaves.types.' + type | translate }}"
+        [nzValue]="type"
+      ></nz-option>
+    </nz-select>
+
+    <div
+      class="form-field__error"
+      *ngIf="submitted && hasError('type')?.required"
+    >
+      <p>
+        {{ 'leaves.addLeave.form.type.errors.required' | translate }}
+      </p>
+    </div>
+  </div>
+
+  <div class="button-wrapper">
+    <button
+      type="submit"
+      class="button button--form button--primary"
+      (click)="createLeave()"
+    >
+      {{ 'employees.addEmployee.form.buttons.confirm' | translate }}
+    </button>
+    <button
+      class="button button--form button--secondary"
+      (click)="formClosed.emit()"
+    >
+      {{ 'employees.addEmployee.form.buttons.cancel' | translate }}
+    </button>
+  </div>
+  <ngx-spinner
+    ><p style="color: white">
+      {{ 'employees.loading.message' | translate }}
+    </p></ngx-spinner
+  >
+</form>

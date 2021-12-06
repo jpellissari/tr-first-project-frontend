@@ -40,7 +40,7 @@
               <td>{{ leave.client.name }}</td>
               <td>{{ leave.employee.name }}</td>
               <td>{{ 'leaves.leaveTypes.' + leave.leaveType | translate }}</td>
-              <td>{{ leave.leaveDate | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ leave.leaveDate }}</td>
               <td>{{ leave.numberDays || '-' }}</td>
               <td>{{ leave.returnDate || '-' }}</td>
               <td>{{ 'leaves.types.' + leave.type | translate }}</td>
@@ -68,12 +68,12 @@
         style="position: relative"
         *ngIf="sideForm.status"
       >
-        <!-- <app-add-leave
+        <app-add-leave
           *ngIf="sideForm.type === 'create'"
-          (formClosedEvent)="closeSideForm()"
+          (formClosed)="closeSideForm()"
           (leaveCreated)="refresh()"
         ></app-add-leave>
-        <app-edit-leave
+        <!-- <app-edit-leave
           *ngIf="sideForm.type === 'update'"
           [leave]="selectedLeave"
           (formClosedEvent)="closeSideForm()"
