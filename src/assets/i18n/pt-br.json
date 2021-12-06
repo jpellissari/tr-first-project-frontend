@@ -199,5 +199,12 @@
     "errors": {
       "listLoading": "Erro ao carregar lista de {{ entity }}. Tente novamente mais tarde."
     }
+  },
+  "form": {
+    "errors": {
+      "required": "{{ field }} é obrigatório e não pode estar em branco",
+      "minLength": "{{ field }} precisa ter no mínimo {{ requiredLength }} caracteres.",
+      "maxLength": "{{ field }} pode ter no máximo {{ requiredLength }} caracteres."
+    }
   }
 }
