@@ -147,6 +147,51 @@
       "PROFESSIONAL_DISEASE": "Doença Profissional",
       "COMMUTING_ACCIDENT": "Trajeto",
       "null": "-"
+    },
+    "addLeave": {
+      "title": "Novo Afastamento",
+      "form": {
+        "client": {
+          "label": "Nome da Empresa",
+          "placeholder": "Pertence a empresa...",
+          "errors": {
+            "required": "Por favor, selecione uma empresa"
+          }
+        },
+        "employee": {
+          "label": "Nome do Empregado",
+          "placeholder": "Selecione o empregado...",
+          "errors": {
+            "required": "Por favor, selecione um empregado"
+          }
+        },
+        "leaveType": {
+          "label": "Tipo do Afastamento",
+          "placeholder": "Selecione o tipo do afastamento...",
+          "errors": {
+            "required": "Por favor, selecione um tipo de afastamento"
+          }
+        },
+        "leaveDate": {
+          "label": "Data de início do Afastamento",
+          "errors": {
+            "required": "Por favor, selecione uma data"
+          }
+        },
+        "numberDays": {
+          "label": "Número de dias",
+          "placeholder": "Informe o número de dias...",
+          "errors": {
+            "required": "Por favor, infome o número de dias"
+          }
+        },
+        "returnDate": {
+          "label": "Data de retorno",
+          "errors": {
+            "required": "Por favor, infome a data de retorno"
+          }
+        }
+      }
     }
   },
   "loading": {
