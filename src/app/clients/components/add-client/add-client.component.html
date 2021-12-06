@@ -1,11 +1,11 @@
 <form class="form" novalidate [formGroup]="form">
-  <h2 class="form__title">Novo Cliente</h2>
+  <h2 class="form__title">{{ 'clients.form.add.title' | translate }}</h2>
 
   <app-input
     fieldId="client-name"
     [control]="form.get('name')"
-    label="{{ 'clients.form.name.label' | translate }}"
-    placeholder="{{ 'clients.form.name.placeholder' | translate }}"
+    label="{{ 'clients.form.fields.name.label' | translate }}"
+    placeholder="{{ 'clients.form.fields.name.placeholder' | translate }}"
   ></app-input>
 
   <div class="button-wrapper">
@@ -14,10 +14,10 @@
       class="button button--form button--primary"
       (click)="createClient()"
     >
-      Adicionar
+      {{ 'clients.form.add.buttons.success' | translate }}
     </button>
     <button class="button button--form button--secondary" (click)="closeForm()">
-      Cancelar
+      {{ 'clients.form.add.buttons.cancel' | translate }}
     </button>
   </div>
   <app-loading></app-loading>

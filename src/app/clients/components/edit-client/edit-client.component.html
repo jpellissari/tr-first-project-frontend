@@ -1,15 +1,17 @@
 <form class="edit-form" novalidate [formGroup]="form">
   <div class="edit-form__header">
-    <h2 class="edit-form__title">Editar Cliente</h2>
+    <h2 class="edit-form__title">
+      {{ 'clients.form.edit.title' | translate: { name: client.name } }}
+    </h2>
 
     <div
       class="edit-form__action--delete button"
       nz-popconfirm
-      nzPopconfirmTitle="Tem certeza que deseja excluir este cliente?"
+      nzPopconfirmTitle="{{ 'clients.form.remove.message' | translate }}"
       nzPopconfirmPlacement="bottom"
       [nzOkType]="'danger'"
-      nzOkText="excluir"
-      nzCancelText="cancelar"
+      nzOkText="{{ 'clients.form.remove.buttons.delete' | translate }}"
+      nzCancelText="{{ 'clients.form.remove.buttons.cancel' | translate }}"
       (nzOnConfirm)="deleteClient()"
       [nzIcon]="iconTpl"
     >
@@ -19,14 +21,14 @@
 
   <app-input
     fieldId="client-id"
-    label="{{ 'clients.form.id.label' | translate }}"
+    label="{{ 'clients.form.fields.id.label' | translate }}"
     [control]="form.get('id')"
   ></app-input>
 
   <app-input
     fieldId="client-name"
-    label="{{ 'clients.form.name.label' | translate }}"
-    placeholder="{{ 'clients.form.name.placeholder' | translate }}"
+    label="{{ 'clients.form.fields.name.label' | translate }}"
+    placeholder="{{ 'clients.form.fields.name.placeholder' | translate }}"
     [control]="form.get('name')"
   ></app-input>
 
@@ -36,10 +38,10 @@
       class="button button--form button--primary"
       (click)="updateClient()"
     >
-      Editar
+      {{ 'clients.form.edit.buttons.success' | translate }}
     </button>
     <button class="button button--form button--secondary" (click)="closeForm()">
-      Cancelar
+      {{ 'clients.form.edit.buttons.cancel' | translate }}
     </button>
   </div>
   <ngx-spinner><p style="color: white">Carregando...</p></ngx-spinner>

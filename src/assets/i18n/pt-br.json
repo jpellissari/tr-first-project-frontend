@@ -8,12 +8,35 @@
       "add_button": "Nova Empresa"
     },
     "form": {
-      "id": {
-        "label": "ID"
+      "add": {
+        "title": "Cadastrar nova Empresa",
+        "buttons": {
+          "success": "Adicionar",
+          "cancel": "Cancelar"
+        }
       },
-      "name": {
-        "label": "Nome",
-        "placeholder": "Nome da Empresa"
+      "edit": {
+        "title": "Editar empresa {{ name }}",
+        "buttons": {
+          "success": "Editar",
+          "cancel": "Cancelar"
+        }
+      },
+      "remove": {
+        "message": "Tem certeza que deseja excluir este cliente?",
+        "buttons": {
+          "delete": "Sim, tenho certeza!",
+          "cancel": "Não, quero voltar."
+        }
+      },
+      "fields": {
+        "id": {
+          "label": "ID"
+        },
+        "name": {
+          "label": "Nome",
+          "placeholder": "Nome da Empresa"
+        }
       }
     }
   },
