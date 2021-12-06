@@ -23,8 +23,7 @@ export class EditClientComponent implements OnInit, OnDestroy, OnChanges {
   @Input() client!: Client;
   @Output() formClosedEvent = new EventEmitter<void>();
   @Output() clientUpdated = new EventEmitter<void>();
-  submitted: boolean = false;
-  form!: FormGroup;
+  form: FormGroup = {} as FormGroup;
   error$ = new Subject<boolean>();
 
   constructor(
@@ -56,15 +55,10 @@ export class EditClientComponent implements OnInit, OnDestroy, OnChanges {
     this.formClosedEvent.emit();
   }
 
-  hasError(field: string) {
-    return this.form.get(field)?.errors;
-  }
-
   updateClient() {
-    this.submitted = true;
     this.loading.start();
     if (this.form.valid) {
-      const client = this.form.getRawValue();
+      const client = Client.create(this.form.getRawValue());
       this.clientsService.update(client).subscribe(
         (success) => {
           this.handleSuccess('Client Updated!');
@@ -101,7 +95,6 @@ export class EditClientComponent implements OnInit, OnDestroy, OnChanges {
 
   private resetForm(): void {
     this.loading.stop();
-    this.submitted = false;
     this.form.reset();
   }
 
