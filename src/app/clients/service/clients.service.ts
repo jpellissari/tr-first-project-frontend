@@ -9,12 +9,13 @@ import { ListEntityService } from 'src/app/shared/services/list-entity.service';
 import { environment } from 'src/environments/environment';
 
 import { Client } from '../models/client';
+import { NewClient } from '../models/new-client';
 
 @Injectable({ providedIn: 'root' })
 export class ClientsService
   implements
     ListEntityService<Client>,
-    AddEntityService<Client>,
+    AddEntityService<NewClient>,
     EditEntityService<Client>,
     DeleteEntityService
 {
@@ -28,7 +29,7 @@ export class ClientsService
     return this.http.get<Client[]>(this.API_URL);
   }
 
-  create(client: Client): Observable<Object> {
+  create(client: NewClient): Observable<Object> {
     return this.http.post(this.API_URL, client).pipe(take(1));
   }
 
