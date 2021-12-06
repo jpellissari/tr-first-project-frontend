@@ -35,7 +35,7 @@ export class ClientsService
 
   update(client: Client): Observable<Object> {
     const { id, ...data } = client;
-    return this.http.post(`${this.API_URL}/${id}`, data).pipe(take(1));
+    return this.http.put(`${this.API_URL}/${id}`, data).pipe(take(1));
   }
 
   delete(id: string): Observable<Object> {
