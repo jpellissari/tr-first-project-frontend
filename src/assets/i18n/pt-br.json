@@ -21,7 +21,8 @@
         "buttons": {
           "success": "Editar",
           "cancel": "Cancelar"
-        }
+        },
+        "success": "Empresa editada com sucesso!"
       },
       "delete": {
         "message": "Tem certeza que deseja excluir este cliente?",
