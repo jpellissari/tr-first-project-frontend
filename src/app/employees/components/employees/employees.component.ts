@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { SideForm } from 'src/app/shared/models/side-form';
-import { Employee } from '../../models/employee';
+import { IEmployee } from '../../models/employee';
 import { EmployeesService } from '../../services/employees.service';
 
 @Component({
@@ -18,12 +18,12 @@ import { EmployeesService } from '../../services/employees.service';
 })
 export class EmployeesComponent implements OnInit, OnDestroy {
   title: string = 'Employees';
-  selectedEmployee: Employee = {} as Employee;
+  selectedEmployee: IEmployee = {} as IEmployee;
   sideForm: SideForm = new SideForm(false, 'create');
   loadingErrorMessage: string = 'Error';
 
   error$: Subject<boolean> = new Subject<boolean>();
-  employees$: Observable<Employee[]> = of();
+  employees$: Observable<IEmployee[]> = of();
 
   private subscriptionDestroyer: Subject<void> = new Subject();
 
@@ -52,7 +52,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     this.sideForm.open();
   }
 
-  openUpdateForm(employee: Employee): void {
+  openUpdateForm(employee: IEmployee): void {
     this.selectedEmployee = employee;
 
     this.sideForm.type = 'update';

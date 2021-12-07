@@ -46,15 +46,12 @@ export class EmployeesService
     if (client) {
       query = `?client=${client}`;
     }
-    return this.http.get<ApiEmployee[]>(`${this.API_URL}${query}`).pipe(
-      map((employees) =>
-        employees.map((apiEmployee) =>
-          Object.assign({} as Employee, {
-            ...apiEmployee,
-            birthdate: parse(apiEmployee.birthdate, 'dd/MM/yyyy', new Date())
-          })
+    return this.http
+      .get<ApiEmployee[]>(`${this.API_URL}${query}`)
+      .pipe(
+        map((employees) =>
+          employees.map((apiEmployee) => Employee.create(apiEmployee))
         )
-      )
-    );
+      );
   }
 }
