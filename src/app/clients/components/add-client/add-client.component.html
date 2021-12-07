@@ -1,4 +1,6 @@
 <form class="form" novalidate [formGroup]="form">
+  <app-loading></app-loading>
+
   <h2 class="form__title">{{ 'clients.forms.add.title' | translate }}</h2>
 
   <app-input
@@ -20,5 +22,4 @@
       {{ 'clients.forms.add.buttons.cancel' | translate }}
     </button>
   </div>
-  <app-loading></app-loading>
 </form>
