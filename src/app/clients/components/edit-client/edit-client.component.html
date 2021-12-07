@@ -1,17 +1,19 @@
 <form class="edit-form" novalidate [formGroup]="form">
+  <app-loading></app-loading>
+
   <div class="edit-form__header">
     <h2 class="edit-form__title">
-      {{ 'clients.form.edit.title' | translate: { name: client.name } }}
+      {{ 'clients.forms.edit.title' | translate: { name: client.name } }}
     </h2>
 
     <app-delete-button
       class="edit-form__action--delete"
-      confirmationMessage="{{ 'clients.form.remove.message' | translate }}"
+      confirmationMessage="{{ 'clients.forms.delete.message' | translate }}"
       confirmationButtonText="{{
-        'clients.form.remove.buttons.delete' | translate
+        'clients.forms.delete.buttons.delete' | translate
       }}"
       cancellationButtonText="{{
-        'clients.form.remove.buttons.cancel' | translate
+        'clients.forms.delete.buttons.cancel' | translate
       }}"
       (deleteEntity)="deleteClient()"
     ></app-delete-button>
@@ -19,14 +21,14 @@
 
   <app-input
     fieldId="client-id"
-    label="{{ 'clients.form.fields.id.label' | translate }}"
+    label="{{ 'clients.forms.fields.id.label' | translate }}"
     [control]="form.get('id')"
   ></app-input>
 
   <app-input
     fieldId="client-name"
-    label="{{ 'clients.form.fields.name.label' | translate }}"
-    placeholder="{{ 'clients.form.fields.name.placeholder' | translate }}"
+    label="{{ 'clients.forms.fields.name.label' | translate }}"
+    placeholder="{{ 'clients.forms.fields.name.placeholder' | translate }}"
     [control]="form.get('name')"
   ></app-input>
 
@@ -36,15 +38,13 @@
       class="button button--form button--primary"
       (click)="updateClient()"
     >
-      {{ 'clients.form.edit.buttons.success' | translate }}
+      {{ 'clients.forms.edit.buttons.success' | translate }}
     </button>
-    <button class="button button--form button--secondary" (click)="closeForm()">
-      {{ 'clients.form.edit.buttons.cancel' | translate }}
+    <button
+      class="button button--form button--secondary"
+      (click)="formClosed.emit()"
+    >
+      {{ 'clients.forms.edit.buttons.cancel' | translate }}
     </button>
   </div>
-  <ngx-spinner
-    ><p style="color: white">
-      {{ 'loading.message' | translate }}
-    </p></ngx-spinner
-  >
 </form>

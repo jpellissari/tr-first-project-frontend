@@ -9,7 +9,9 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { Client } from '../../models/client';
@@ -20,17 +22,20 @@ import { ClientsService } from '../../service/clients.service';
   templateUrl: './edit-client.component.html'
 })
 export class EditClientComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() client!: Client;
-  @Output() formClosedEvent = new EventEmitter<void>();
+  @Input() client: Client = {} as Client;
+  @Output() formClosed = new EventEmitter<void>();
   @Output() clientUpdated = new EventEmitter<void>();
+
   form: FormGroup = {} as FormGroup;
-  error$ = new Subject<boolean>();
+
+  private subscriptionDestroyer: Subject<void> = new Subject();
 
   constructor(
     private readonly formBuilder: FormBuilder,
+    private readonly translateService: TranslateService,
     private readonly clientsService: ClientsService,
     private readonly toastService: ToastService,
-    private readonly loading: LoadingService
+    private readonly loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
@@ -47,40 +52,45 @@ export class EditClientComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnDestroy(): void {
-    this.resetForm();
-  }
-
-  closeForm(): void {
-    this.resetForm();
-    this.formClosedEvent.emit();
+    this.subscriptionDestroyer.next();
+    this.subscriptionDestroyer.complete();
   }
 
   updateClient() {
-    this.loading.start();
     if (this.form.valid) {
-      const client = Client.create(this.form.getRawValue());
-      this.clientsService.update(client).subscribe(
+      this.loadingService.start();
+
+      const client = this.createClient(this.form.getRawValue());
+      this.clientsService
+        .update(client)
+        .pipe(takeUntil(this.subscriptionDestroyer))
+        .subscribe(
+          (success) => {
+            const message = this.getSuccessMessage();
+            this.handleSuccess(message);
+          },
+          (error) => {
+            this.handleError(error);
+          }
+        );
+    }
+  }
+
+  deleteClient() {
+    this.loadingService.start();
+
+    this.clientsService
+      .delete(this.form.getRawValue().id)
+      .pipe(takeUntil(this.subscriptionDestroyer))
+      .subscribe(
         (success) => {
-          this.handleSuccess('Client Updated!');
+          const message = this.getDeleteSuccessMessage();
+          this.handleSuccess(message);
         },
         (error) => {
           this.handleError(error);
         }
       );
-    }
-    this.loading.stop();
-  }
-
-  deleteClient() {
-    this.loading.start();
-    this.clientsService.delete(this.form.getRawValue().id).subscribe(
-      (success) => {
-        this.handleSuccess('Client deleted!');
-      },
-      (error) => {
-        this.handleError(error);
-      }
-    );
   }
 
   private createForm(): FormGroup {
@@ -93,22 +103,27 @@ export class EditClientComponent implements OnInit, OnDestroy, OnChanges {
     });
   }
 
-  private resetForm(): void {
-    this.loading.stop();
-    this.form.reset();
+  private createClient(formValues: any): Client {
+    const { id, name } = formValues;
+    return Client.create({ id, name });
+  }
+
+  private getSuccessMessage(): string {
+    return this.translateService.instant('clients.forms.edit.success');
+  }
+
+  private getDeleteSuccessMessage(): string {
+    return this.translateService.instant('clients.forms.delete.success');
   }
 
   private handleSuccess(message: string): void {
-    this.resetForm();
     this.toastService.showSuccessMessage(message);
     this.clientUpdated.emit();
-    this.formClosedEvent.emit();
-    this.clientUpdated.emit();
+    this.formClosed.emit();
   }
 
   private handleError(error: any): void {
-    this.error$.next(true);
-    this.loading.stop();
+    this.loadingService.stop();
     this.toastService.showErrorMessage(error);
   }
 }
