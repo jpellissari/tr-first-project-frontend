@@ -80,7 +80,7 @@ export class AddClientComponent implements OnDestroy {
 
   private showSuccessToaster(): void {
     this.transalateService
-      .get('clients.form.add.success')
+      .get('clients.forms.add.success')
       .pipe(takeUntil(this.subscriptionDestroyer))
       .subscribe((message) => this.toastService.showSuccessMessage(message));
   }

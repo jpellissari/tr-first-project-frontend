@@ -7,7 +7,7 @@
       },
       "add_button": "Nova Empresa"
     },
-    "form": {
+    "forms": {
       "add": {
         "title": "Cadastrar nova Empresa",
         "buttons": {
@@ -23,12 +23,13 @@
           "cancel": "Cancelar"
         }
       },
-      "remove": {
+      "delete": {
         "message": "Tem certeza que deseja excluir este cliente?",
         "buttons": {
           "delete": "Sim, tenho certeza!",
           "cancel": "Não, quero voltar."
-        }
+        },
+        "success": "Empresa removida com sucesso!"
       },
       "fields": {
         "id": {
