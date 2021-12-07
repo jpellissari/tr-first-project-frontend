@@ -1,11 +1,6 @@
 import { Client } from 'src/app/clients/models/client';
 import { JobPosition } from 'src/app/job-positions/models/job-position';
-
-export enum EmployeeType {
-  EMPLOYEE = 'EMPLOYEE',
-  INTERN = 'INTERN',
-  PARTNER = 'PARTNER'
-}
+import { EmployeeType } from './employee-type';
 
 export interface ApiEmployee {
   id: string;
