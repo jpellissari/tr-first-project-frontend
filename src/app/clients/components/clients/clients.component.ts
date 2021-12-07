@@ -17,14 +17,13 @@ import { ClientsService } from '../../service/clients.service';
   templateUrl: './clients.component.html'
 })
 export class ClientsComponent implements OnInit, OnDestroy {
-  title: string = '';
-  selectedEntity: Client = {} as Client;
+  title: string = 'Clients';
+  selectedClient: Client = {} as Client;
   sideForm: SideForm = new SideForm(false, 'create');
-  loadingErrorMessage: string = '';
-  entityName: string = '';
+  loadingErrorMessage: string = 'Error';
 
   error$: Subject<boolean> = new Subject<boolean>();
-  entityList$: Observable<Client[]> = of();
+  clients$: Observable<Client[]> = of();
 
   private subscriptionDestroyer: Subject<void> = new Subject();
 
@@ -37,11 +36,10 @@ export class ClientsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.entityName = 'clients';
     this.loadingService.start();
     this.setPageTitle();
     this.setLoadingErrorMessage();
-    this.fetchEntityList();
+    this.fetchClients();
   }
 
   ngOnDestroy(): void {
@@ -55,28 +53,24 @@ export class ClientsComponent implements OnInit, OnDestroy {
   }
 
   openUpdateForm(client: Client): void {
-    this.selectedEntity = client;
+    this.selectedClient = client;
 
     this.sideForm.type = 'update';
     this.sideForm.open();
   }
 
-  closeSideForm() {
+  handleClientCreated(): void {
+    this.refresh();
     this.sideForm.close();
   }
 
-  handleClientCreated(): void {
-    this.refresh();
-    this.closeSideForm();
-  }
-
   refresh(): void {
-    this.fetchEntityList();
+    this.fetchClients();
   }
 
   private setPageTitle(): void {
     this.translateService
-      .get(`${this.entityName}.title`)
+      .get('clients.title')
       .pipe(takeUntil(this.subscriptionDestroyer))
       .subscribe((translation) => (this.title = translation));
     this.titleService.setTitle(`${environment.title} - ${this.title}`);
@@ -91,8 +85,8 @@ export class ClientsComponent implements OnInit, OnDestroy {
       .subscribe((translation) => (this.loadingErrorMessage = translation));
   }
 
-  private fetchEntityList(): void {
-    this.entityList$ = this.clientService.list().pipe(
+  private fetchClients(): void {
+    this.clients$ = this.clientService.list().pipe(
       tap(() => this.loadingService.stop()),
       catchError(() => {
         return this.handleError(this.loadingErrorMessage);
