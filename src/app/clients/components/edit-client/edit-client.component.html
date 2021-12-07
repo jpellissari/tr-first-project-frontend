@@ -4,19 +4,17 @@
       {{ 'clients.form.edit.title' | translate: { name: client.name } }}
     </h2>
 
-    <div
-      class="edit-form__action--delete button"
-      nz-popconfirm
-      nzPopconfirmTitle="{{ 'clients.form.remove.message' | translate }}"
-      nzPopconfirmPlacement="bottom"
-      [nzOkType]="'danger'"
-      nzOkText="{{ 'clients.form.remove.buttons.delete' | translate }}"
-      nzCancelText="{{ 'clients.form.remove.buttons.cancel' | translate }}"
-      (nzOnConfirm)="deleteClient()"
-      [nzIcon]="iconTpl"
-    >
-      <i nz-icon nzType="delete" nzTheme="outline"></i>
-    </div>
+    <app-delete-button
+      class="edit-form__action--delete"
+      confirmationMessage="{{ 'clients.form.remove.message' | translate }}"
+      confirmationButtonText="{{
+        'clients.form.remove.buttons.delete' | translate
+      }}"
+      cancellationButtonText="{{
+        'clients.form.remove.buttons.cancel' | translate
+      }}"
+      (deleteEntity)="deleteClient()"
+    ></app-delete-button>
   </div>
 
   <app-input
@@ -44,9 +42,9 @@
       {{ 'clients.form.edit.buttons.cancel' | translate }}
     </button>
   </div>
-  <ngx-spinner><p style="color: white">Carregando...</p></ngx-spinner>
+  <ngx-spinner
+    ><p style="color: white">
+      {{ 'loading.message' | translate }}
+    </p></ngx-spinner
+  >
 </form>
-
-<ng-template #iconTpl>
-  <i nz-icon nzType="question-circle-o" style="color: red"></i>
-</ng-template>
