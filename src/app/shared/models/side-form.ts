@@ -21,6 +21,14 @@ class SideForm {
     this._type = type;
   }
 
+  isTargetUpdate(): boolean {
+    return this._type === 'update';
+  }
+
+  isTargetCreate(): boolean {
+    return this._type === 'create';
+  }
+
   open(): void {
     this._status = true;
   }
