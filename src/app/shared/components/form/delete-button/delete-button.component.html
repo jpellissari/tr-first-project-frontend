@@ -1,0 +1,17 @@
+<div
+  class="button button--delete"
+  nz-popconfirm
+  nzOkType="danger"
+  nzPopconfirmPlacement="bottom"
+  [nzIcon]="iconTpl"
+  [nzOkText]="confirmationButtonText"
+  [nzCancelText]="cancellationButtonText"
+  [nzPopconfirmTitle]="confirmationMessage"
+  (nzOnConfirm)="deleteEntity.emit()"
+>
+  <i nz-icon nzType="delete" nzTheme="outline"></i>
+</div>
+
+<ng-template #iconTpl>
+  <i nz-icon nzType="question-circle-o" style="color: red"></i>
+</ng-template>
