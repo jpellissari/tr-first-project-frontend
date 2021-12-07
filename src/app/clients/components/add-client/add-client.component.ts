@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { LoadingService } from 'src/app/shared/services/loading.service';
@@ -21,9 +22,10 @@ export class AddClientComponent implements OnDestroy {
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private clientsService: ClientsService,
-    private loadingService: LoadingService,
-    private toastService: ToastService
+    private readonly clientsService: ClientsService,
+    private readonly loadingService: LoadingService,
+    private readonly toastService: ToastService,
+    private readonly transalateService: TranslateService
   ) {
     this.form = this.createForm();
   }
@@ -72,8 +74,15 @@ export class AddClientComponent implements OnDestroy {
 
   private handleSuccess(): void {
     this.loadingService.stop();
-    this.toastService.showSuccessMessage('Client created');
+    this.showSuccessToaster();
     this.clientCreated.emit();
+  }
+
+  private showSuccessToaster(): void {
+    this.transalateService
+      .get('clients.form.add.success')
+      .pipe(takeUntil(this.subscriptionDestroyer))
+      .subscribe((message) => this.toastService.showSuccessMessage(message));
   }
 
   private handleError(error: any): void {

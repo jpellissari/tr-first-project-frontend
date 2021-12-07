@@ -13,7 +13,8 @@
         "buttons": {
           "success": "Adicionar",
           "cancel": "Cancelar"
-        }
+        },
+        "success": "Empresa cadastrada com sucesso!"
       },
       "edit": {
         "title": "Editar empresa {{ name }}",
