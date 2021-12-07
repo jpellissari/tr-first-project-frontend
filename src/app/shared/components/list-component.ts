@@ -13,7 +13,7 @@ export class ListComponent<T> {
   entityList$!: Observable<T[]>;
   selectedEntity!: T;
   error$ = new Subject<boolean>();
-  sideForm!: SideForm;
+  sideForm: SideForm = new SideForm(false, 'create');
   loadingErrorMessage!: string;
 
   constructor(
@@ -27,7 +27,6 @@ export class ListComponent<T> {
     this.loadingService.start();
     this.setPageTitle();
     this.setLoadingErrorMessage();
-    this.initSideForm();
     this.fetchEntityList();
   }
 
@@ -55,13 +54,6 @@ export class ListComponent<T> {
     );
   }
 
-  private initSideForm() {
-    this.sideForm = {
-      status: false,
-      type: 'create'
-    };
-  }
-
   private handleError(message: string) {
     this.loadingService.stop();
     this.error$.next(true);
@@ -70,23 +62,19 @@ export class ListComponent<T> {
   }
 
   openCreateForm(): void {
-    this.sideForm = {
-      status: true,
-      type: 'create'
-    };
+    this.sideForm.type = 'create';
+    this.sideForm.open();
   }
 
   openUpdateForm(entity: T): void {
     this.selectedEntity = entity;
 
-    this.sideForm = {
-      status: true,
-      type: 'update'
-    };
+    this.sideForm.type = 'update';
+    this.sideForm.open();
   }
 
   closeSideForm() {
-    this.sideForm.status = false;
+    this.sideForm.close();
   }
 
   refresh(): void {
