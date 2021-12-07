@@ -12,12 +12,14 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
 import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
 import { ListEmployeesComponent } from './components/list-employees/list-employees.component';
 import { SharedModule } from '../shared/shared.module';
+import { EmployeesComponent } from './components/employees/employees.component';
 
 @NgModule({
   declarations: [
     AddEmployeeComponent,
     EditEmployeeComponent,
-    ListEmployeesComponent
+    ListEmployeesComponent,
+    EmployeesComponent
   ],
   imports: [
     CommonModule,

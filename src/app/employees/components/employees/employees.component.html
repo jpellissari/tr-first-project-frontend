@@ -1,0 +1,49 @@
+<section class="entity__main">
+  <app-topbar title="{{ 'employees.title' | translate }}"></app-topbar>
+  <div class="entity__content">
+    <div class="actions">
+      <input
+        class="actions__search"
+        type="text"
+        placeholder="{{ 'employees.actions.search.placeholder' | translate }}"
+      />
+      <button
+        class="button button--primary button--big"
+        (click)="openCreateForm()"
+      >
+        {{ 'employees.actions.add_button' | translate }}
+      </button>
+    </div>
+    <div class="content__main">
+      <div class="main-table__container">
+        <app-list-employees
+          class="main-table__content"
+          *ngIf="employees$ | async as employees; else loading"
+          [employees]="employees"
+          (showEmployee)="openUpdateForm($event)"
+        ></app-list-employees>
+
+        <ng-template #loading>
+          <app-loading
+            [withError]="true"
+            [error$]="error$"
+            [errorMessage]="loadingErrorMessage"
+          ></app-loading>
+        </ng-template>
+      </div>
+      <div class="content__form" *ngIf="sideForm.status">
+        <app-add-employee
+          *ngIf="sideForm.isTargetCreate()"
+          (formClosedEvent)="sideForm.close()"
+          (employeeCreated)="refresh()"
+        ></app-add-employee>
+        <app-edit-employee
+          *ngIf="sideForm.isTargetUpdate()"
+          [employee]="selectedEmployee"
+          (formClosedEvent)="sideForm.close()"
+          (employeeUpdatedEvent)="refresh()"
+        ></app-edit-employee>
+      </div>
+    </div>
+  </div>
+</section>
