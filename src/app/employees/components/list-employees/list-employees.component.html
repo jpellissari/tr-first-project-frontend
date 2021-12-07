@@ -1,95 +1,39 @@
-<section class="entity__main">
-  <app-topbar title="{{ 'employees.title' | translate }}"></app-topbar>
-  <div class="entity__content">
-    <div class="actions">
-      <input
-        class="actions__search"
-        type="text"
-        placeholder="{{ 'employees.actions.search.placeholder' | translate }}"
-      />
-      <button
-        class="button button--primary button--big"
-        (click)="openCreateForm()"
-      >
-        {{ 'employees.actions.add_button' | translate }}
-      </button>
-    </div>
-    <div class="content__main">
-      <div class="main-table__container">
-        <nz-table
-          class="main-table__content"
-          *ngIf="entityList$ | async as employees; else loading"
-          #basicTable
-          [nzData]="employees"
-        >
-          <thead>
-            <tr>
-              <th>{{ 'employees.table.header.name' | translate }}</th>
-              <th>{{ 'employees.table.header.client' | translate }}</th>
-              <th>{{ 'employees.table.header.job' | translate }}</th>
-              <th>
-                {{ 'employees.table.header.national_identity' | translate }}
-              </th>
-              <th>{{ 'employees.table.header.birthdate' | translate }}</th>
-              <th>{{ 'employees.table.header.salary' | translate }}</th>
-              <th>{{ 'employees.table.header.active' | translate }}</th>
-              <th>{{ 'employees.table.header.type' | translate }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              *ngFor="let employee of employees"
-              (click)="openUpdateForm(employee)"
-            >
-              <td>{{ employee.name }}</td>
-              <td>{{ employee.client.name }}</td>
-              <td>{{ employee.jobPosition.name }}</td>
-              <td>{{ employee.nationalIdentity }}</td>
-              <td>{{ employee.birthdate | date: 'dd/MM/yyyy' }}</td>
-              <td>{{ employee.salary | currency: 'BRL':'symbol' }}</td>
-              <td>
-                <i
-                  *ngIf="employee.active"
-                  nz-icon
-                  nzType="check"
-                  nzTheme="outline"
-                ></i>
-                <i
-                  *ngIf="!employee.active"
-                  nz-icon
-                  nzType="close-circle"
-                  nzTheme="outline"
-                ></i>
-              </td>
-              <td>{{ 'employees.type.' + employee.type | translate }}</td>
-            </tr>
-          </tbody>
-        </nz-table>
-
-        <ng-template #loading>
-          <app-loading
-            [error$]="error$"
-            [errorMessage]="loadingErrorMessage"
-          ></app-loading>
-        </ng-template>
-      </div>
-      <div
-        class="content__form"
-        style="position: relative"
-        *ngIf="sideForm.status"
-      >
-        <app-add-employee
-          *ngIf="sideForm.type === 'create'"
-          (formClosedEvent)="closeSideForm()"
-          (employeeCreated)="refresh()"
-        ></app-add-employee>
-        <app-edit-employee
-          *ngIf="sideForm.type === 'update'"
-          [employee]="selectedEntity"
-          (formClosedEvent)="closeSideForm()"
-          (employeeUpdatedEvent)="refresh()"
-        ></app-edit-employee>
-      </div>
-    </div>
-  </div>
-</section>
+<nz-table [nzData]="employees">
+  <thead>
+    <tr>
+      <th>{{ 'employees.table.header.name' | translate }}</th>
+      <th>{{ 'employees.table.header.client' | translate }}</th>
+      <th>{{ 'employees.table.header.job' | translate }}</th>
+      <th>
+        {{ 'employees.table.header.national_identity' | translate }}
+      </th>
+      <th>{{ 'employees.table.header.birthdate' | translate }}</th>
+      <th>{{ 'employees.table.header.salary' | translate }}</th>
+      <th>{{ 'employees.table.header.active' | translate }}</th>
+      <th>{{ 'employees.table.header.type' | translate }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let employee of employees"
+      (click)="showEmployee.emit(employee)"
+    >
+      <td>{{ employee.name }}</td>
+      <td>{{ employee.client.name }}</td>
+      <td>{{ employee.jobPosition.name }}</td>
+      <td>{{ employee.nationalIdentity }}</td>
+      <td>{{ employee.birthdate | date: 'dd/MM/yyyy' }}</td>
+      <td>{{ employee.salary | currency: 'BRL':'symbol' }}</td>
+      <td>
+        <i *ngIf="employee.active" nz-icon nzType="check" nzTheme="outline"></i>
+        <i
+          *ngIf="!employee.active"
+          nz-icon
+          nzType="close-circle"
+          nzTheme="outline"
+        ></i>
+      </td>
+      <td>{{ 'employees.type.' + employee.type | translate }}</td>
+    </tr>
+  </tbody>
+</nz-table>
