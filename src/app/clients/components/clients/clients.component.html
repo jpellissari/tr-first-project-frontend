@@ -1,5 +1,6 @@
 <section class="entity__main">
   <app-topbar title="{{ 'clients.title' | translate }}"></app-topbar>
+
   <div class="entity__content">
     <div class="actions">
       <input
@@ -31,20 +32,16 @@
           ></app-loading>
         </ng-template>
       </div>
-      <div
-        class="content__form"
-        style="position: relative"
-        *ngIf="sideForm.status"
-      >
+      <div class="content__form" *ngIf="sideForm.status">
         <app-add-client
           *ngIf="sideForm.type === 'create'"
           (formClosedEvent)="closeSideForm()"
-          (clientCreated)="refresh()"
+          (clientCreated)="handleClientCreated()"
         ></app-add-client>
         <app-edit-client
           *ngIf="sideForm.type === 'update'"
           [client]="selectedEntity"
-          (formClosedEvent)="closeSideForm()"
+          (formClosed)="closeSideForm()"
           (clientUpdated)="refresh()"
         ></app-edit-client>
       </div>
