@@ -24,14 +24,11 @@ import { FormHelperService } from 'src/app/shared/services/form-helper.service';
 export class AddLeaveComponent implements OnInit {
   @Output() formClosed = new EventEmitter<void>();
   @Output() leaveCreated = new EventEmitter<void>();
-  submitted: boolean = false;
+
   form: FormGroup;
   leaveTypes: LeaveType[];
   leaveTypesThatAllowReturnDate: LeaveType[];
   types: Type[];
-  error$ = new Subject<boolean>();
-  clients$!: Observable<Client[]>;
-  employees$!: Observable<Employee[]>;
   isFieldVisible = {
     leaveType: false,
     returnDate: false,
@@ -39,7 +36,9 @@ export class AddLeaveComponent implements OnInit {
     type: false
   };
 
-  formFields = 'returnDate';
+  error$ = new Subject<boolean>();
+  clients$!: Observable<Client[]>;
+  employees$!: Observable<Employee[]>;
 
   constructor(
     public readonly formHelper: FormHelperService,
@@ -114,38 +113,6 @@ export class AddLeaveComponent implements OnInit {
     }
   }
 
-  private showReturnDate(): void {
-    this.isFieldVisible.returnDate = true;
-  }
-
-  private hideReturnDate(): void {
-    this.isFieldVisible.returnDate = false;
-  }
-
-  private disableNumberDays(): void {
-    this.form.get('numberDays')?.disable();
-  }
-
-  private enableNumberDays(): void {
-    this.form.get('numberDays')?.enable();
-  }
-
-  private createForm(): FormGroup {
-    return this.formBuilder.group({
-      clientId: [null, Validators.required],
-      employee: [{ value: null }, Validators.required],
-      leaveType: [null, Validators.required],
-      leaveDate: [null, Validators.required],
-      numberDays: [
-        { value: null, disabled: true },
-        { updateOn: 'blur' },
-        [Validators.required, Validators.min(0)]
-      ],
-      returnDate: [{ value: null, disabled: true }],
-      type: [null, Validators.required]
-    });
-  }
-
   searchClient(name: string): void {
     this.clients$.pipe(
       map((clients) =>
@@ -186,6 +153,38 @@ export class AddLeaveComponent implements OnInit {
     }
   }
 
+  private showReturnDate(): void {
+    this.isFieldVisible.returnDate = true;
+  }
+
+  private hideReturnDate(): void {
+    this.isFieldVisible.returnDate = false;
+  }
+
+  private disableNumberDays(): void {
+    this.form.get('numberDays')?.disable();
+  }
+
+  private enableNumberDays(): void {
+    this.form.get('numberDays')?.enable();
+  }
+
+  private createForm(): FormGroup {
+    return this.formBuilder.group({
+      clientId: [null, Validators.required],
+      employee: [{ value: null }, Validators.required],
+      leaveType: [null, Validators.required],
+      leaveDate: [null, Validators.required],
+      numberDays: [
+        { value: null, disabled: true },
+        { updateOn: 'blur' },
+        [Validators.required, Validators.min(0)]
+      ],
+      returnDate: [{ value: null, disabled: true }],
+      type: [null, Validators.required]
+    });
+  }
+
   private handleSuccess(): void {
     this.loadingService.stop();
 
@@ -200,26 +199,22 @@ export class AddLeaveComponent implements OnInit {
   private handleError(error: any): void {
     this.loadingService.stop();
 
-    if (error.status === 409) {
-      this.translateService
-        .get('leaves.addEmployee.errors.conflit')
-        .subscribe((message: string) =>
-          this.toastService.showErrorMessage(message)
-        );
-    }
-
     if (error.error.message === 'Already has TERMINATION.') {
-      this.toastService.showErrorMessage(
-        `O funcionário ${this.form.value.employee.name} possui um afastamento do tipo 'demissão' e não permite novos afastamentos`
-      );
+      this.translateService
+        .get('leaves.forms.errors.termination', {
+          name: this.form.value.employee.name
+        })
+        .pipe(take(1))
+        .subscribe((message) => this.toastService.showErrorMessage(message));
+    } else if (error.error.message === 'Already has CONTRIBUTORS_DEATH.') {
+      this.translateService
+        .get('leaves.forms.errors.death', {
+          name: this.form.value.employee.name
+        })
+        .pipe(take(1))
+        .subscribe((message) => this.toastService.showErrorMessage(message));
+    } else {
+      this.toastService.showErrorMessage(error);
     }
-
-    if (error.error.message === 'Already has CONTRIBUTORS_DEATH.') {
-      this.toastService.showErrorMessage(
-        `O funcionário ${this.form.value.employee.name} possui um afastamento do tipo 'morte' e não permite novos afastamentos.`
-      );
-    }
-
-    this.toastService.showErrorMessage(error);
   }
 }

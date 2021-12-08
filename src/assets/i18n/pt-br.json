@@ -207,6 +207,10 @@
           "label": "Tipo do Acidente",
           "placeholder": "Selecione o tipo do acidente do funcionário."
         }
+      },
+      "errors": {
+        "termination": "O funcionário {{ name }} possui um afastamento do tipo 'demissão' e não permite novos afastamentos",
+        "death": "O funcionário {{ name }} possui um afastamento do tipo 'morte' e não permite novos afastamentos."
       }
     },
     "table": {
