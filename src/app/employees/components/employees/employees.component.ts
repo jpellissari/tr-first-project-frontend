@@ -36,7 +36,6 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.loadingService.start();
     this.setPageTitle();
     this.setLoadingErrorMessage();
     this.fetchEmployees();
@@ -86,6 +85,8 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   }
 
   private fetchEmployees(): void {
+    this.loadingService.start();
+
     this.employees$ = this.employeeService.list().pipe(
       tap(() => this.loadingService.stop()),
       catchError(() => {
