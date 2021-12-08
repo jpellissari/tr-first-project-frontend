@@ -28,7 +28,7 @@
   <!-- Employee -->
   <app-base-input
     fieldId="leave-employee"
-    [control]="form.get('employee')"
+    [control]="form.get('employeeId')"
     label="{{ 'leaves.forms.fields.employee.label' | translate }}"
     *ngIf="form.value.clientId"
   >
@@ -38,13 +38,13 @@
       nzPlaceHolder="{{
         'leaves.forms.fields.employee.placeholder' | translate
       }}"
-      [formControl]="formHelper.castToFormControl(form.get('employee'))"
+      [formControl]="formHelper.castToFormControl(form.get('employeeId'))"
       (nzOnSearch)="searchEmployee($event)"
     >
       <nz-option
         *ngFor="let employee of employees$ | async"
         [nzLabel]="employee.name"
-        [nzValue]="employee"
+        [nzValue]="employee.id"
       ></nz-option>
     </nz-select>
   </app-base-input>

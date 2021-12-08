@@ -8,12 +8,13 @@ import { ListEntityService } from 'src/app/shared/services/list-entity.service';
 import { environment } from 'src/environments/environment';
 import { ApiLeave } from '../models/api-leave';
 import { ApiSimplifiedLeave } from '../models/api-simplified-leave';
+import { NewLeave } from '../models/new-leave';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LeavesService
-  implements ListEntityService<ApiSimplifiedLeave>, AddEntityService<ApiLeave>
+  implements ListEntityService<ApiSimplifiedLeave>, AddEntityService<NewLeave>
 {
   private readonly API_URL: string;
 
@@ -21,7 +22,7 @@ export class LeavesService
     this.API_URL = `${environment.api.baseUrl}/leaves`;
   }
 
-  create(entity: ApiLeave): Observable<Object> {
+  create(entity: NewLeave): Observable<Object> {
     return this.http.post(this.API_URL, entity).pipe(take(1));
   }
 

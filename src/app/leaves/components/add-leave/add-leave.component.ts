@@ -15,6 +15,7 @@ import { LeaveType, LeaveTypes } from '../../models/leave-type';
 import { Type } from '../../models/type';
 import { LeavesService } from '../../services/leaves.service';
 import { FormHelperService } from 'src/app/shared/services/form-helper.service';
+import { NewLeave } from '../../models/new-leave';
 
 @Component({
   selector: 'app-add-leave',
@@ -136,12 +137,9 @@ export class AddLeaveComponent implements OnInit {
     if (this.form.valid) {
       this.loadingService.start();
 
-      const body = this.form.value;
-      body.employeeId = body.employee.id;
-      body.leaveType = body.leaveType.type;
-      body.leaveDate = this.datePipe.transform(body.leaveDate, 'dd/MM/yyyy');
+      const newLeaveBody = NewLeave.create(this.form.value);
 
-      this.leavesService.create(body).subscribe(
+      this.leavesService.create(newLeaveBody).subscribe(
         (success) => {
           this.handleSuccess();
         },
@@ -171,7 +169,7 @@ export class AddLeaveComponent implements OnInit {
   private createForm(): FormGroup {
     return this.formBuilder.group({
       clientId: [null, Validators.required],
-      employee: [{ value: null }, Validators.required],
+      employeeId: [null, Validators.required],
       leaveType: [null, Validators.required],
       leaveDate: [null, Validators.required],
       numberDays: [
