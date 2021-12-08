@@ -1,20 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { EMPTY, Observable } from 'rxjs';
+import { catchError, map, take, tap } from 'rxjs/operators';
 import { AddEntityService } from 'src/app/shared/services/add-entity.service';
-import { BaseCrudService } from 'src/app/shared/services/base-crud.service';
+import { DeleteEntityService } from 'src/app/shared/services/delete-entity.service';
+import { FindByIdEntityService } from 'src/app/shared/services/find-by-id-entity.service';
 import { ListEntityService } from 'src/app/shared/services/list-entity.service';
 import { environment } from 'src/environments/environment';
-import { ApiLeave } from '../models/api-leave';
+import { IApiLeave } from '../models/api-leave';
 import { ApiSimplifiedLeave } from '../models/api-simplified-leave';
+import { ILeave, Leave } from '../models/leave';
 import { NewLeave } from '../models/new-leave';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LeavesService
-  implements ListEntityService<ApiSimplifiedLeave>, AddEntityService<NewLeave>
+  implements
+    ListEntityService<ApiSimplifiedLeave>,
+    FindByIdEntityService<ILeave>,
+    AddEntityService<NewLeave>,
+    DeleteEntityService
 {
   private readonly API_URL: string;
 
@@ -28,5 +34,20 @@ export class LeavesService
 
   list(): Observable<ApiSimplifiedLeave[]> {
     return this.http.get<ApiSimplifiedLeave[]>(this.API_URL);
+  }
+
+  findById(id: string): Observable<ILeave> {
+    return this.http.get<IApiLeave>(`${this.API_URL}/${id}`).pipe(
+      take(1),
+      map((leave) => Leave.create(leave)),
+      catchError((error) => {
+        console.log(error);
+        return EMPTY;
+      })
+    );
+  }
+
+  delete(id: string): Observable<Object> {
+    return this.http.delete(`${this.API_URL}/${id}`).pipe(take(1));
   }
 }

@@ -1,1 +1,179 @@
-<p>edit-leave works!</p>
+<form class="edit-form" novalidate [formGroup]="form">
+  <app-loading></app-loading>
+
+  <div class="edit-form__header">
+    <h2 class="edit-form__title">
+      {{ 'leaves.forms.edit.title' | translate }}
+    </h2>
+
+    <app-delete-button
+      class="edit-form__action--delete"
+      confirmationMessage="{{ 'leaves.forms.delete.message' | translate }}"
+      confirmationButtonText="{{
+        'leaves.forms.delete.buttons.delete' | translate
+      }}"
+      cancellationButtonText="{{
+        'leaves.forms.delete.buttons.cancel' | translate
+      }}"
+      (deleteEntity)="deleteLeave()"
+    ></app-delete-button>
+  </div>
+
+  <!-- ID -->
+  <app-input
+    fieldId="leave-id"
+    label="{{ 'leaves.forms.fields.id.label' | translate }}"
+    [control]="form.get('id')"
+  ></app-input>
+
+  <!-- Client -->
+  <app-base-input
+    fieldId="leave-client"
+    [control]="form.get('clientId')"
+    label="{{ 'leaves.forms.fields.client.label' | translate }}"
+  >
+    <nz-select
+      id="leave-client"
+      nzShowSearch
+      nzPlaceHolder="{{ 'leaves.forms.fields.client.placeholder' | translate }}"
+      [formControl]="formHelper.castToFormControl(form.get('clientId'))"
+      (nzOnSearch)="searchClient($event)"
+      (ngModelChange)="onClientChange($event)"
+    >
+      <nz-option
+        *ngFor="let client of clients$ | async"
+        [nzLabel]="client.name"
+        [nzValue]="client.id"
+      ></nz-option>
+    </nz-select>
+  </app-base-input>
+
+  <!-- Employee -->
+  <app-base-input
+    fieldId="leave-employee"
+    [control]="form.get('employeeId')"
+    label="{{ 'leaves.forms.fields.employee.label' | translate }}"
+  >
+    <nz-select
+      id="leave-employee"
+      nzShowSearch
+      nzPlaceHolder="{{
+        'leaves.forms.fields.employee.placeholder' | translate
+      }}"
+      [formControl]="formHelper.castToFormControl(form.get('employeeId'))"
+      (nzOnSearch)="searchEmployee($event)"
+    >
+      <nz-option
+        *ngFor="let employee of employees$ | async"
+        [nzLabel]="employee.name"
+        [nzValue]="employee.id"
+      ></nz-option>
+    </nz-select>
+  </app-base-input>
+
+  <!-- Leave Date -->
+  <app-base-input
+    fieldId="leave-leaveDate"
+    [control]="form.get('leaveDate')"
+    label="{{ 'leaves.forms.fields.leaveDate.label' | translate }}"
+  >
+    <nz-date-picker
+      id="leave-leaveDate"
+      [formControl]="formHelper.castToFormControl(form.get('leaveDate'))"
+      nzFormat="dd/MM/yyyy"
+      (ngModelChange)="onLeaveDateChange($event)"
+    ></nz-date-picker>
+  </app-base-input>
+
+  <!-- Leave Type -->
+  <app-base-input
+    fieldId="leave-leaveType"
+    [control]="form.get('leaveType')"
+    label="{{ 'leaves.forms.fields.leaveType.label' | translate }}"
+  >
+    <nz-select
+      id="leave-leave-type"
+      nzShowSearch
+      nzPlaceHolder="{{
+        'leaves.forms.fields.leaveType.placeholder' | translate
+      }}"
+      [formControl]="formHelper.castToFormControl(form.get('leaveType'))"
+      (ngModelChange)="onLeaveTypeChange($event)"
+    >
+      <nz-option
+        *ngFor="let lType of leaveTypes"
+        [nzValue]="lType"
+        nzLabel="{{ 'leaves.leaveTypes.' + lType.type | translate }}"
+      ></nz-option>
+    </nz-select>
+  </app-base-input>
+
+  <!-- Number of days -->
+  <app-base-input
+    fieldId="leave-numberDays"
+    [control]="form.get('numberDays')"
+    label="{{ 'leaves.forms.fields.numberDays.label' | translate }}"
+    *ngIf="leave.numberDays"
+  >
+    <input
+      class="form-field__input"
+      id="leave-numberDays"
+      type="number"
+      placeholder="{{
+        'leaves.forms.fields.numberDays.placeholder' | translate
+      }}"
+      [formControl]="formHelper.castToFormControl(form.get('numberDays'))"
+      (ngModelChange)="onNumberOfDaysChange($event)"
+    />
+  </app-base-input>
+
+  <!-- Return Date -->
+  <app-base-input
+    fieldId="leave-returnDate"
+    [control]="form.get('returnDate')"
+    label="{{ 'leaves.forms.fields.returnDate.label' | translate }}"
+    *ngIf="leave.returnDate"
+  >
+    <nz-date-picker
+      id="leave-returnDate"
+      nzFormat="dd/MM/yyyy"
+      [formControl]="formHelper.castToFormControl(form.get('returnDate'))"
+    ></nz-date-picker>
+  </app-base-input>
+
+  <!-- Leave Type -->
+  <app-base-input
+    fieldId="leave-type"
+    [control]="form.get('type')"
+    label="{{ 'leaves.forms.fields.type.label' | translate }}"
+    *ngIf="leave.type"
+  >
+    <nz-select
+      id="leave-type"
+      nzPlaceHolder="{{ 'leaves.forms.fields.type.placeholder' | translate }}"
+      [formControl]="formHelper.castToFormControl(form.get('type'))"
+    >
+      <nz-option
+        *ngFor="let type of types"
+        nzLabel="{{ 'leaves.types.' + type | translate }}"
+        [nzValue]="type"
+      ></nz-option>
+    </nz-select>
+  </app-base-input>
+
+  <div class="button-wrapper">
+    <button
+      type="submit"
+      class="button button--form button--primary"
+      (click)="updateLeave()"
+    >
+      {{ 'leaves.forms.edit.buttons.success' | translate }}
+    </button>
+    <button
+      class="button button--form button--secondary"
+      (click)="formClosed.emit()"
+    >
+      {{ 'leaves.forms.edit.buttons.cancel' | translate }}
+    </button>
+  </div>
+</form>
