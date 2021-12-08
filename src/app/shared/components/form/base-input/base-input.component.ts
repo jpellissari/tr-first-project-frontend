@@ -34,10 +34,6 @@ export class BaseInputComponent implements DoCheck {
     }
   }
 
-  toControl(abstractControl: AbstractControl | null): FormControl {
-    return abstractControl as FormControl;
-  }
-
   private buildError(): ValidationError | null {
     return this.validationErrorFactory.create({
       errors: this.control!.errors,
