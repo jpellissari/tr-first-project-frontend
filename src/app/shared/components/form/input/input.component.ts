@@ -13,6 +13,7 @@ export class InputComponent {
   @Input() label: string = '';
   @Input() placeholder: string = '';
   @Input() type: string = 'text';
+  @Input() mask: string = '';
 
   constructor(public formHelper: FormHelperService) {}
 }
