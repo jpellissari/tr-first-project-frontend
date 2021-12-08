@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { CpfError } from './cpf-error';
 import { MaxLengthError } from './max-length-error';
 import { MinLengthError } from './min-length-error';
 import { RequiredFieldError } from './required-error';
@@ -35,6 +36,9 @@ export class ValidationErrorFactory {
         label,
         errors?.maxlength?.requiredLength
       );
+    }
+    if (errors?.cpf) {
+      return new CpfError(translateService, label);
     }
 
     return null;

@@ -36,12 +36,12 @@ export class CpfCnpjValidator implements Validator {
           cpfCnpj.length
         ) < 0
       ) {
-        return { length: true };
+        return { cpf: true };
       }
 
       // Verifica se todos os dígitos são iguais.
       if (/^([0-9])\1*$/.test(cpfCnpj)) {
-        return { equalDigits: true };
+        return { cpf: true };
       }
 
       // A seguir é realizado o cálculo verificador.
@@ -52,7 +52,7 @@ export class CpfCnpjValidator implements Validator {
 
       if (cpfCnpj !== cpfCnpjArr.reverse().join('')) {
         // Dígito verificador não é válido, resultando em falha.
-        return { digit: true };
+        return { cpf: true };
       }
 
       return null;
