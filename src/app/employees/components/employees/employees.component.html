@@ -34,13 +34,13 @@
       <div class="content__form" *ngIf="sideForm.status">
         <app-add-employee
           *ngIf="sideForm.isTargetCreate()"
-          (formClosedEvent)="sideForm.close()"
-          (employeeCreated)="refresh()"
+          (formClosed)="sideForm.close()"
+          (employeeCreated)="handleEmployeeCreated()"
         ></app-add-employee>
         <app-edit-employee
           *ngIf="sideForm.isTargetUpdate()"
           [employee]="selectedEmployee"
-          (formClosedEvent)="sideForm.close()"
+          (formClosed)="sideForm.close()"
           (employeeUpdatedEvent)="refresh()"
         ></app-edit-employee>
       </div>
