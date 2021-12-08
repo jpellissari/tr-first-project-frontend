@@ -1,0 +1,5 @@
+<div class="form-field" [ngClass]="{ 'form-field__invalid': validationErrors }">
+  <label [for]="fieldId" class="form-field__label">{{ label }}</label>
+  <ng-content></ng-content>
+  <app-validation [validationErrors]="validationErrors"></app-validation>
+</div>
