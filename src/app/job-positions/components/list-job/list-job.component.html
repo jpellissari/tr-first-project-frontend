@@ -1,75 +1,12 @@
-<section class="entity__main">
-  <app-topbar title="{{ 'jobs.title' | translate }}"></app-topbar>
-
-  <div class="entity__content">
-    <div class="actions">
-      <input
-        class="actions__search"
-        type="text"
-        placeholder="{{ 'jobs.actions.search.placeholder' | translate }}"
-      />
-      <button
-        class="button button--primary button--big"
-        (click)="openCreateForm()"
-      >
-        {{ 'jobs.actions.add_button' | translate }}
-      </button>
-    </div>
-    <div class="content__main">
-      <div class="main-table__container">
-        <nz-table
-          class="main-table__content"
-          *ngIf="entityList$ | async as jobs; else loadingError"
-          #basicTable
-          [nzData]="jobs"
-        >
-          <thead>
-            <tr>
-              <th>Nome</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let job of jobs" (click)="openUpdateForm(job)">
-              <td>{{ job.name }}</td>
-            </tr>
-          </tbody>
-        </nz-table>
-
-        <ng-template #loadingError>
-          <div
-            class="loading-error__container"
-            *ngIf="error$ | async; else loading"
-          >
-            <span>
-              {{ loadingErrorMessage }}
-            </span>
-          </div>
-          <ng-template #loading>
-            <ngx-spinner
-              ><p style="color: white">
-                {{ 'loading.message' | translate }}
-              </p></ngx-spinner
-            >
-          </ng-template>
-        </ng-template>
-      </div>
-      <div
-        class="content__form"
-        style="position: relative"
-        *ngIf="sideForm.status"
-      >
-        <app-add-job
-          *ngIf="sideForm.type === 'create'"
-          (formClosedEvent)="closeSideForm()"
-          (jobCreated)="refresh()"
-        ></app-add-job>
-        <app-edit-job
-          *ngIf="sideForm.type === 'update'"
-          [job]="selectedEntity"
-          (formClosedEvent)="closeSideForm()"
-          (jobUpdated)="refresh()"
-        ></app-edit-job>
-      </div>
-    </div>
-  </div>
-</section>
+<nz-table [nzData]="jobs">
+  <thead>
+    <tr>
+      <th>Nome</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let job of jobs" (click)="showJob.emit(job)">
+      <td>{{ job.name }}</td>
+    </tr>
+  </tbody>
+</nz-table>
