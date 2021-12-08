@@ -151,6 +151,64 @@
       },
       "add_button": "Novo Afastamento"
     },
+    "forms": {
+      "add": {
+        "title": "Cadastrar novo Afastamento",
+        "buttons": {
+          "success": "Adicionar",
+          "cancel": "Cancelar"
+        },
+        "success": "Afastamento cadastrado com sucesso!"
+      },
+      "edit": {
+        "title": "Editar Afastamento",
+        "buttons": {
+          "success": "Editar",
+          "cancel": "Cancelar"
+        },
+        "success": "Afastamento editado com sucesso!"
+      },
+      "delete": {
+        "message": "Tem certeza que deseja remover este afastamento?",
+        "buttons": {
+          "delete": "Sim, tenho certeza!",
+          "cancel": "Não, quero voltar."
+        },
+        "success": "Afastamento removido com sucesso!"
+      },
+      "fields": {
+        "id": {
+          "label": "ID"
+        },
+        "client": {
+          "label": "Empresa",
+          "placeholder": "Selecione a empresa que deseja cadastrar o afastamento"
+        },
+        "leaveDate": {
+          "label": "Início do Afastamento",
+          "placeholder": "Selecione a data que inicia o afastamento"
+        },
+        "employee": {
+          "label": "Funcionário",
+          "placeholder": "Selecione o funcionário que deseja cadastrar o afastamento"
+        },
+        "leaveType": {
+          "label": "Tipo do Afastamento",
+          "placeholder": "Selecione o tipo do afastamento"
+        },
+        "numberDays": {
+          "label": "Número de dias",
+          "placeholder": "Número de dias que o funcionário ficará afastasdo"
+        },
+        "returnDate": {
+          "label": "Data de retorno"
+        },
+        "type": {
+          "label": "Tipo do Acidente",
+          "placeholder": "Selecione o tipo do acidente do funcionário."
+        }
+      }
+    },
     "table": {
       "header": {
         "client": "Nome da Empresa",
@@ -176,51 +234,6 @@
       "PROFESSIONAL_DISEASE": "Doença Profissional",
       "COMMUTING_ACCIDENT": "Trajeto",
       "null": "-"
-    },
-    "addLeave": {
-      "title": "Novo Afastamento",
-      "form": {
-        "client": {
-          "label": "Nome da Empresa",
-          "placeholder": "Pertence a empresa...",
-          "errors": {
-            "required": "Por favor, selecione uma empresa"
-          }
-        },
-        "employee": {
-          "label": "Nome do Empregado",
-          "placeholder": "Selecione o empregado...",
-          "errors": {
-            "required": "Por favor, selecione um empregado"
-          }
-        },
-        "leaveType": {
-          "label": "Tipo do Afastamento",
-          "placeholder": "Selecione o tipo do afastamento...",
-          "errors": {
-            "required": "Por favor, selecione um tipo de afastamento"
-          }
-        },
-        "leaveDate": {
-          "label": "Data de início do Afastamento",
-          "errors": {
-            "required": "Por favor, selecione uma data"
-          }
-        },
-        "numberDays": {
-          "label": "Número de dias",
-          "placeholder": "Informe o número de dias...",
-          "errors": {
-            "required": "Por favor, infome o número de dias"
-          }
-        },
-        "returnDate": {
-          "label": "Data de retorno",
-          "errors": {
-            "required": "Por favor, infome a data de retorno"
-          }
-        }
-      }
     }
   },
   "loading": {

@@ -3,7 +3,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { addDays } from 'date-fns';
 import { Client } from 'src/app/clients/models/client';
 import { ClientsService } from 'src/app/clients/service/clients.service';
@@ -14,6 +14,7 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 import { LeaveType, LeaveTypes } from '../../models/leave-type';
 import { Type } from '../../models/type';
 import { LeavesService } from '../../services/leaves.service';
+import { FormHelperService } from 'src/app/shared/services/form-helper.service';
 
 @Component({
   selector: 'app-add-leave',
@@ -41,6 +42,7 @@ export class AddLeaveComponent implements OnInit {
   formFields = 'returnDate';
 
   constructor(
+    public readonly formHelper: FormHelperService,
     private readonly formBuilder: FormBuilder,
     private readonly clientsService: ClientsService,
     private readonly leavesService: LeavesService,
@@ -144,10 +146,6 @@ export class AddLeaveComponent implements OnInit {
     });
   }
 
-  hasError(field: string) {
-    return this.form.get(field)?.errors;
-  }
-
   searchClient(name: string): void {
     this.clients$.pipe(
       map((clients) =>
@@ -169,13 +167,14 @@ export class AddLeaveComponent implements OnInit {
   }
 
   createLeave(): void {
-    this.submitted = true;
     if (this.form.valid) {
       this.loadingService.start();
+
       const body = this.form.value;
       body.employeeId = body.employee.id;
       body.leaveType = body.leaveType.type;
       body.leaveDate = this.datePipe.transform(body.leaveDate, 'dd/MM/yyyy');
+
       this.leavesService.create(body).subscribe(
         (success) => {
           this.handleSuccess();
@@ -189,13 +188,16 @@ export class AddLeaveComponent implements OnInit {
 
   private handleSuccess(): void {
     this.loadingService.stop();
-    this.form.reset();
-    this.toastService.showSuccessMessage('Leave created');
+
+    this.translateService
+      .get('leaves.forms.add.success')
+      .pipe(take(1))
+      .subscribe((message) => this.toastService.showSuccessMessage(message));
+
     this.leaveCreated.emit();
   }
 
   private handleError(error: any): void {
-    this.error$.next(true);
     this.loadingService.stop();
 
     if (error.status === 409) {
