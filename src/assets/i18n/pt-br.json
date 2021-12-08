@@ -50,6 +50,41 @@
         "placeholder": "Buscar Cargo..."
       },
       "add_button": "Novo Cargo"
+    },
+    "forms": {
+      "add": {
+        "title": "Cadastrar novo cargo",
+        "buttons": {
+          "success": "Adicionar",
+          "cancel": "Cancelar"
+        },
+        "success": "Cargo adicionado com sucesso!"
+      },
+      "edit": {
+        "title": "Editar cargo",
+        "buttons": {
+          "success": "Editar",
+          "cancel": "Cancelar"
+        },
+        "success": "Cargo editado com sucesso!"
+      },
+      "delete": {
+        "message": "Tem certeza que deseja excluir este cargo?",
+        "buttons": {
+          "delete": "Sim, tenho certeza!",
+          "cancel": "Não, quero voltar."
+        },
+        "success": "Cargo removido com sucesso!"
+      },
+      "fields": {
+        "id": {
+          "label": "ID"
+        },
+        "name": {
+          "label": "Nome",
+          "placeholder": "Nome do Cargo"
+        }
+      }
     }
   },
   "employees": {

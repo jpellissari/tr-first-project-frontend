@@ -3,12 +3,12 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  OnDestroy,
   OnInit,
   Output,
   SimpleChanges
 } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 
 import { LoadingService } from 'src/app/shared/services/loading.service';
@@ -18,20 +18,21 @@ import { JobPositionsService } from '../../service/job-positions.service';
 
 @Component({
   selector: 'app-edit-job',
-  templateUrl: './edit-job.component.html',
-  styleUrls: ['./edit-job.component.scss']
+  templateUrl: './edit-job.component.html'
 })
-export class EditJobComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() job!: JobPosition;
-  @Output() formClosedEvent = new EventEmitter<void>();
+export class EditJobComponent implements OnInit, OnChanges {
+  @Input() job: JobPosition = {} as JobPosition;
+  @Output() formClosed = new EventEmitter<void>();
   @Output() jobUpdated = new EventEmitter<void>();
+
   submitted: boolean = false;
-  form!: FormGroup;
+  form: FormGroup = {} as FormGroup;
   error$ = new Subject<boolean>();
   confirmation = false;
 
   constructor(
     private readonly formBuilder: FormBuilder,
+    private readonly translateService: TranslateService,
     private readonly jobsService: JobPositionsService,
     private readonly toastService: ToastService,
     private readonly loading: LoadingService
@@ -50,26 +51,15 @@ export class EditJobComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    this.resetForm();
-  }
-
-  closeForm(): void {
-    this.resetForm();
-    this.formClosedEvent.emit();
-  }
-
-  hasError(field: string) {
-    return this.form.get(field)?.errors;
-  }
-
   updateJob() {
-    this.submitted = true;
-    this.loading.start();
     if (this.form.valid) {
+      this.loading.start();
       this.jobsService.update(this.form.getRawValue()).subscribe(
         (success) => {
-          this.handleSuccess('Job Updated!');
+          const message = this.getTranslationMessageFor(
+            'jobs.forms.edit.success'
+          );
+          this.handleSuccess(message);
         },
         (errors) => {
           console.log(errors);
@@ -77,7 +67,6 @@ export class EditJobComponent implements OnInit, OnChanges, OnDestroy {
         }
       );
     }
-    this.loading.stop();
   }
 
   openConfirmation() {
@@ -88,12 +77,19 @@ export class EditJobComponent implements OnInit, OnChanges, OnDestroy {
     this.loading.start();
     this.jobsService.delete(this.form.getRawValue().id).subscribe(
       (success) => {
-        this.handleSuccess('Job deleted!');
+        const message = this.getTranslationMessageFor(
+          'jobs.forms.delete.success'
+        );
+        this.handleSuccess(message);
       },
       (error) => {
         this.handleError(error);
       }
     );
+  }
+
+  private getTranslationMessageFor(key: string): string {
+    return this.translateService.instant(key);
   }
 
   private createForm(): FormGroup {
@@ -106,22 +102,14 @@ export class EditJobComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  private resetForm(): void {
-    this.loading.stop();
-    this.submitted = false;
-    this.form.reset();
-  }
-
   private handleSuccess(message: string): void {
-    this.resetForm();
+    this.loading.stop();
     this.toastService.showSuccessMessage(message);
     this.jobUpdated.emit();
-    this.formClosedEvent.emit();
-    this.jobUpdated.emit();
+    this.formClosed.emit();
   }
 
   private handleError(errors: any[]): void {
-    this.error$.next(true);
     this.loading.stop();
     errors.forEach((error) =>
       this.toastService.showErrorMessage(`${error.field} ${error.error}`)

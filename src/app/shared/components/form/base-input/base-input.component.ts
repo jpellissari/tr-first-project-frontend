@@ -1,12 +1,8 @@
 import { Component, DoCheck, Input } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
 import { ValidationErrorFactory } from 'src/app/shared/errors/validation-errors';
 
-import { MinLengthError } from 'src/app/shared/errors/validation-errors/min-length-error';
-import { RequiredFieldError } from 'src/app/shared/errors/validation-errors/required-error';
-import { MaxLengthError } from '../../../errors/validation-errors/max-length-error';
 import { ValidationError } from '../../../errors/validation-errors/validation-error';
 
 @Component({

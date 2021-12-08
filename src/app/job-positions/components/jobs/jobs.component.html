@@ -39,13 +39,13 @@
       >
         <app-add-job
           *ngIf="sideForm.type === 'create'"
-          (formClosedEvent)="sideForm.close()"
+          (formClosed)="sideForm.close()"
           (jobCreated)="handleJobCreated()"
         ></app-add-job>
         <app-edit-job
           *ngIf="sideForm.type === 'update'"
           [job]="selectedJob"
-          (formClosedEvent)="sideForm.close()"
+          (formClosed)="sideForm.close()"
           (jobUpdated)="refresh()"
         ></app-edit-job>
       </div>
