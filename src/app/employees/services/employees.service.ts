@@ -1,10 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { parse } from 'date-fns';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { AddEntityService } from 'src/app/shared/services/add-entity.service';
-import { BaseCrudService } from 'src/app/shared/services/base-crud.service';
 import { DeleteEntityService } from 'src/app/shared/services/delete-entity.service';
 import { EditEntityService } from 'src/app/shared/services/edit-entity.service';
 import { ListEntityService } from 'src/app/shared/services/list-entity.service';
