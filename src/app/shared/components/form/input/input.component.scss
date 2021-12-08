@@ -20,15 +20,9 @@
       border: 1px solid #0057ff;
     }
   }
+}
 
-  &__invalid {
-    label {
-      color: red;
-    }
-
-    input {
-      border: 1px solid red;
-      margin-bottom: 0px;
-    }
-  }
+.ng-invalid.ng-touched {
+  border: 1px solid red;
+  margin-bottom: 0px;
 }
