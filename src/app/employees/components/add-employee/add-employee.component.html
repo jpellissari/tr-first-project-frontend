@@ -3,6 +3,7 @@
 
   <h2 class="form__title">{{ 'employees.forms.add.title' | translate }}</h2>
 
+  <!-- Name -->
   <app-input
     fieldId="employee-name"
     [control]="form.get('name')"
@@ -10,6 +11,31 @@
     placeholder="{{ 'employees.forms.fields.name.placeholder' | translate }}"
   ></app-input>
 
+  <!-- National Identity -->
+  <app-input
+    fieldId="employee-nationalIdentity"
+    [control]="form.get('nationalIdentity')"
+    label="{{ 'employees.forms.fields.nationalIdentity.label' | translate }}"
+    placeholder="{{
+      'employees.forms.fields.nationalIdentity.placeholder' | translate
+    }}"
+    mask="000.000.000-00"
+  ></app-input>
+
+  <!-- Birthdate -->
+  <app-base-input
+    fieldId="employee-birthdate"
+    [control]="form.get('birthdate')"
+    label="{{ 'employees.forms.fields.birthdate.label' | translate }}"
+  >
+    <nz-date-picker
+      id="employee-birthdate"
+      [formControl]="formHelper.castToFormControl(form.get('birthdate'))"
+      nzFormat="dd/MM/yyyy"
+    ></nz-date-picker>
+  </app-base-input>
+
+  <!-- Client -->
   <app-base-input
     fieldId="employee-client"
     [control]="form.get('clientId')"
@@ -33,78 +59,7 @@
     </nz-select>
   </app-base-input>
 
-  <app-base-input
-    fieldId="employee-job"
-    [control]="form.get('jobPositionId')"
-    label="{{ 'employees.forms.fields.job.label' | translate }}"
-  >
-    <nz-select
-      id="employee-job"
-      nzShowSearch
-      nzPlaceHolder="{{ 'employees.forms.fields.job.placeholder' | translate }}"
-      [formControl]="formHelper.castToFormControl(form.get('jobPositionId'))"
-      [nzShowArrow]="false"
-      (nzOnSearch)="searchJob($event)"
-    >
-      <nz-option
-        *ngFor="let job of jobs$ | async"
-        [nzLabel]="job.name"
-        [nzValue]="job.id"
-      ></nz-option>
-    </nz-select>
-  </app-base-input>
-
-  <app-base-input
-    fieldId="employee-birthdate"
-    [control]="form.get('birthdate')"
-    label="{{ 'employees.forms.fields.birthdate.label' | translate }}"
-  >
-    <nz-date-picker
-      id="employee-birthdate"
-      [formControl]="formHelper.castToFormControl(form.get('birthdate'))"
-      nzFormat="dd/MM/yyyy"
-    ></nz-date-picker>
-  </app-base-input>
-
-  <app-input
-    fieldId="employee-nationalIdentity"
-    [control]="form.get('nationalIdentity')"
-    label="{{ 'employees.forms.fields.nationalIdentity.label' | translate }}"
-    placeholder="{{
-      'employees.forms.fields.nationalIdentity.placeholder' | translate
-    }}"
-    mask="000.000.000-00"
-  ></app-input>
-
-  <app-base-input
-    fieldId="employee-salary"
-    [control]="form.get('salary')"
-    label="{{ 'employees.forms.fields.salary.label' | translate }}"
-  >
-    <input
-      currencyMask
-      [options]="{
-        prefix: 'R$ ',
-        thousands: '.',
-        decimal: ',',
-        align: 'left'
-      }"
-      class="form-field__input"
-      id="client-salary"
-      type="text"
-      placeholder="{{
-        'employees.forms.fields.salary.placeholder' | translate
-      }}"
-      [formControl]="formHelper.castToFormControl(form.get('salary'))"
-    />
-  </app-base-input>
-
-  <app-base-input [control]="form.get('active')">
-    <label nz-checkbox formControlName="active">{{
-      'employees.forms.fields.active.label' | translate
-    }}</label>
-  </app-base-input>
-
+  <!-- Type -->
   <app-base-input
     fieldId="employee-type"
     [control]="form.get('type')"
@@ -131,6 +86,59 @@
         nzLabel="{{ 'employees.type.PARTNER' | translate }}"
       ></nz-option>
     </nz-select>
+  </app-base-input>
+
+  <!-- Job -->
+  <app-base-input
+    fieldId="employee-job"
+    [control]="form.get('jobPositionId')"
+    label="{{ 'employees.forms.fields.job.label' | translate }}"
+  >
+    <nz-select
+      id="employee-job"
+      nzShowSearch
+      nzPlaceHolder="{{ 'employees.forms.fields.job.placeholder' | translate }}"
+      [formControl]="formHelper.castToFormControl(form.get('jobPositionId'))"
+      [nzShowArrow]="false"
+      (nzOnSearch)="searchJob($event)"
+    >
+      <nz-option
+        *ngFor="let job of jobs$ | async"
+        [nzLabel]="job.name"
+        [nzValue]="job.id"
+      ></nz-option>
+    </nz-select>
+  </app-base-input>
+
+  <!-- Salary -->
+  <app-base-input
+    fieldId="employee-salary"
+    [control]="form.get('salary')"
+    label="{{ 'employees.forms.fields.salary.label' | translate }}"
+  >
+    <input
+      currencyMask
+      [options]="{
+        prefix: 'R$ ',
+        thousands: '.',
+        decimal: ',',
+        align: 'left'
+      }"
+      class="form-field__input"
+      id="client-salary"
+      type="text"
+      placeholder="{{
+        'employees.forms.fields.salary.placeholder' | translate
+      }}"
+      [formControl]="formHelper.castToFormControl(form.get('salary'))"
+    />
+  </app-base-input>
+
+  <!-- Active -->
+  <app-base-input [control]="form.get('active')">
+    <label nz-checkbox formControlName="active">{{
+      'employees.forms.fields.active.label' | translate
+    }}</label>
   </app-base-input>
 
   <div class="button-wrapper">
