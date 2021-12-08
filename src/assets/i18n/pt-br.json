@@ -60,6 +60,52 @@
       },
       "add_button": "Novo Empregado"
     },
+    "forms": {
+      "add": {
+        "title": "Cadastrar novo Funcionário",
+        "buttons": {
+          "success": "Adicionar",
+          "cancel": "Cancelar"
+        },
+        "success": "Funcionário cadastrado com sucesso!"
+      },
+      "fields": {
+        "name": {
+          "label": "Nome",
+          "placeholder": "Digite o nome do funcionário"
+        },
+        "client": {
+          "label": "Empresa",
+          "placeholder": "Selecione a qual empresa pertence o funcionário"
+        },
+        "job": {
+          "label": "Cargo",
+          "placeholder": "Selecione o cargo do funcionário"
+        },
+        "birthdate": {
+          "label": "Data de nascimento",
+          "placeholder": "Selecione a data de nascimento do Funcionário"
+        },
+        "nationalIdentity": {
+          "label": "CPF",
+          "placeholder": "Digite o CPF do funcionário"
+        },
+        "salary": {
+          "label": "Salário",
+          "placeholder": "Digite o salário do funcionário"
+        },
+        "active": {
+          "label": "Funcionário Ativo"
+        },
+        "type": {
+          "label": "Tipo",
+          "placeholder": "Selecione o tipo do funcionário."
+        }
+      },
+      "errors": {
+        "conflit": "Empresa selecionada já possui um funcionário com este CPF."
+      }
+    },
     "table": {
       "header": {
         "name": "Nome do Empregado",
@@ -76,66 +122,6 @@
       "EMPLOYEE": "Empregado",
       "INTERN": "Estagiário",
       "PARTNER": "Contribuinte"
-    },
-    "addEmployee": {
-      "title": "Cadastrar Empregado",
-      "form": {
-        "name": {
-          "label": "Nome",
-          "placeholder": "Nome do empregado",
-          "errors": {
-            "required": "Por favor informe um nome para o empregado.",
-            "minLength": "Nome precisa ter no mínimo {{ requiredLength }} caracteres.",
-            "maxLength": "Nome pode ter no máximo {{ requiredLength }} caracteres."
-          }
-        },
-        "client": {
-          "label": "Empresa",
-          "placeholder": "Pertence a empresa...",
-          "errors": {
-            "required": "Por favor preencha a qual Empresa pertence o empregado."
-          }
-        },
-        "job": {
-          "label": "Cargo",
-          "placeholder": "Cargo do empregado",
-          "errors": {
-            "required": "Por favor preencha o cargo do empregado."
-          }
-        },
-        "birthdate": {
-          "label": "Data de Nascimento",
-          "errors": {
-            "required": "Por favor preencha a data de nascimento do empregado."
-          }
-        },
-        "nationalIdentity": {
-          "label": "CPF",
-          "placeholder": "CPF do empregado",
-          "error": "Cpf não é válido."
-        },
-        "salary": {
-          "label": "Salário",
-          "placeholder": "Salário do empregado",
-          "errors": {
-            "required": "Por favor preencha o salário do empregado."
-          }
-        },
-        "active": {
-          "label": "Empregado Ativo"
-        },
-        "buttons": {
-          "confirm": "Cadastrar",
-          "cancel": "Cancelar"
-        },
-        "type": {
-          "label": "Tipo do empregado",
-          "placeholder": "Selecione o tipo do empregado."
-        }
-      },
-      "errors": {
-        "conflit": "Empresa selecionada já possui um empregado com este cpf."
-      }
     },
     "editEmployee": {
       "title": "Editar Empregado",

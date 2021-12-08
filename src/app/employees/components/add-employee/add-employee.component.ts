@@ -1,12 +1,6 @@
-import {
-  Component,
-  EventEmitter,
-  Inject,
-  OnDestroy,
-  Output
-} from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { ClientsService } from 'src/app/clients/service/clients.service';
 import { JobPositionsService } from 'src/app/job-positions/service/job-positions.service';
 
@@ -16,22 +10,29 @@ import { EmployeesService } from '../../services/employees.service';
 import { CpfCnpjValidator } from 'src/app/shared/validators/cpf-cnpj-validator';
 import { DatePipe } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+import { Client } from 'src/app/clients/models/client';
+import { map, take, tap } from 'rxjs/operators';
+import { JobPosition } from 'src/app/job-positions/models/job-position';
+import { FormHelperService } from 'src/app/shared/services/form-helper.service';
 
 @Component({
   selector: 'app-add-employee',
-  templateUrl: './add-employee.component.html',
-  styleUrls: ['./add-employee.component.scss']
+  templateUrl: './add-employee.component.html'
 })
 export class AddEmployeeComponent implements OnDestroy {
-  @Output() formClosedEvent = new EventEmitter<void>();
+  @Output() formClosed = new EventEmitter<void>();
   @Output() employeeCreated = new EventEmitter<void>();
-  submitted: boolean = false;
+
   form: FormGroup;
+
   error$ = new Subject<boolean>();
-  clientOptions: Array<{ value: string; text: string }> = [];
-  jobOptions: Array<{ value: string; text: string }> = [];
+  clients$: Observable<Client[]> = of();
+  jobs$: Observable<JobPosition[]> = of();
+
+  private subscriptionDestroyer: Subject<void> = new Subject();
 
   constructor(
+    public formHelper: FormHelperService,
     private readonly formBuilder: FormBuilder,
     private readonly employeesService: EmployeesService,
     private readonly clientsService: ClientsService,
@@ -64,60 +65,39 @@ export class AddEmployeeComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.resetForm();
-  }
-
-  closeForm(): void {
-    this.resetForm();
-    this.formClosedEvent.emit();
-  }
-
-  hasError(field: string) {
-    return this.form.get(field)?.errors;
+    this.subscriptionDestroyer.next();
+    this.subscriptionDestroyer.complete();
   }
 
   searchClient(value: string): void {
-    this.clientsService.list().subscribe((clients) => {
-      const listOfOption: Array<{ value: string; text: string }> = [];
-
-      clients
-        .filter((client) =>
-          client.name.toLowerCase().includes(value.toLowerCase())
+    this.clients$ = this.clientsService
+      .list()
+      .pipe(
+        map((clients) =>
+          clients.filter(
+            (client) => client.name.toLocaleLowerCase().indexOf(value) > -1
+          )
         )
-        .forEach((client) => {
-          listOfOption.push({
-            value: client.id,
-            text: client.name
-          });
-        });
-
-      this.clientOptions = listOfOption;
-    });
+      );
   }
 
   searchJob(value: string): void {
-    this.jobPositionsService.list().subscribe((jobs) => {
-      const listOfOption: Array<{ value: string; text: string }> = [];
-
-      jobs
-        .filter((job) => job.name.toLowerCase().includes(value.toLowerCase()))
-        .forEach((job) => {
-          listOfOption.push({
-            value: job.id,
-            text: job.name
-          });
-        });
-
-      this.jobOptions = listOfOption;
-    });
+    this.jobs$ = this.jobPositionsService
+      .list()
+      .pipe(
+        map((jobs) =>
+          jobs.filter((job) => job.name.toLocaleLowerCase().indexOf(value) > -1)
+        )
+      );
   }
 
   createEmployee() {
-    this.submitted = true;
-    this.loading.start();
     if (this.form.valid) {
+      this.loading.start();
+
       const body = this.form.value;
       body.birthdate = this.datePipe.transform(body.birthdate, 'dd/MM/yyyy');
+
       this.employeesService.create(body).subscribe(
         (success) => {
           this.handleSuccess();
@@ -127,33 +107,31 @@ export class AddEmployeeComponent implements OnDestroy {
         }
       );
     }
-    this.loading.stop();
-  }
-
-  private resetForm(): void {
-    this.loading.stop();
-    this.submitted = false;
-    this.form.reset();
   }
 
   private handleSuccess(): void {
-    this.resetForm();
-    this.toastService.showSuccessMessage('Employee created');
+    this.loading.stop();
+    this.translate
+      .get('employees.forms.add.success')
+      .pipe(take(1))
+      .subscribe((message: string) =>
+        this.toastService.showSuccessMessage(message)
+      );
+
     this.employeeCreated.emit();
   }
 
   private handleError(error: any): void {
-    this.error$.next(true);
     this.loading.stop();
 
     if (error.status === 409) {
       this.translate
-        .get('employees.addEmployee.errors.conflit')
+        .get('employees.forms.errors.conflit')
         .subscribe((message: string) =>
           this.toastService.showErrorMessage(message)
         );
+    } else {
+      this.toastService.showErrorMessage(error);
     }
-
-    this.toastService.showErrorMessage(error);
   }
 }
