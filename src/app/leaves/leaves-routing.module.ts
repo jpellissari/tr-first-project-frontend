@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListLeavesComponent } from './components/list-leaves/list-leaves.component';
+import { LeavesComponent } from './components/leaves/leaves.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ListLeavesComponent
+    component: LeavesComponent
   }
 ];
 

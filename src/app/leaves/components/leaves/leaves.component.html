@@ -1,0 +1,49 @@
+<section class="entity__main">
+  <app-topbar title="{{ 'leaves.title' | translate }}"></app-topbar>
+  <div class="entity__content">
+    <div class="actions">
+      <!-- <input
+        class="actions__search"
+        type="text"
+        placeholder="{{ 'leaves.actions.search.placeholder' | translate }}"
+      /> -->
+      <button
+        class="button button--primary button--big"
+        (click)="openCreateForm()"
+      >
+        {{ 'leaves.actions.add_button' | translate }}
+      </button>
+    </div>
+    <div class="content__main">
+      <div class="main-table__container">
+        <app-list-leaves
+          class="main-table__content"
+          *ngIf="leaves$ | async as leaves; else loading"
+          [leaves]="leaves"
+          (showLeave)="openUpdateForm($event)"
+        ></app-list-leaves>
+
+        <ng-template #loading>
+          <app-loading
+            [withError]="true"
+            [error$]="error$"
+            [errorMessage]="loadingErrorMessage"
+          ></app-loading>
+        </ng-template>
+      </div>
+      <div class="content__form" *ngIf="sideForm.status">
+        <app-add-leave
+          *ngIf="sideForm.type === 'create'"
+          (formClosed)="sideForm.close()"
+          (leaveCreated)="handleLeaveCreated()"
+        ></app-add-leave>
+        <app-edit-leave
+          *ngIf="sideForm.type === 'update'"
+          [leaveId]="selectedLeave.id"
+          (formClosed)="sideForm.close()"
+          (leaveUpdated)="refresh()"
+        ></app-edit-leave>
+      </div>
+    </div>
+  </div>
+</section>

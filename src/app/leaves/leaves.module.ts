@@ -7,9 +7,15 @@ import { SharedModule } from '../shared/shared.module';
 import { LeavesRoutingModule } from './leaves-routing.module';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { LeavesComponent } from './components/leaves/leaves.component';
 
 @NgModule({
-  declarations: [AddLeaveComponent, EditLeaveComponent, ListLeavesComponent],
+  declarations: [
+    AddLeaveComponent,
+    EditLeaveComponent,
+    ListLeavesComponent,
+    LeavesComponent
+  ],
   imports: [
     CommonModule,
     LeavesRoutingModule,
