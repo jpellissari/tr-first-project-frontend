@@ -67,8 +67,7 @@ export class EditJobComponent implements OnInit, OnChanges, OnDestroy {
     this.submitted = true;
     this.loading.start();
     if (this.form.valid) {
-      const { id, name } = this.form.getRawValue();
-      this.jobsService.save({ name }, id).subscribe(
+      this.jobsService.update(this.form.getRawValue()).subscribe(
         (success) => {
           this.handleSuccess('Job Updated!');
         },

@@ -54,7 +54,7 @@ export class AddJobComponent implements OnDestroy {
     this.loading.start();
     if (this.form.valid) {
       const { name } = this.form.value;
-      this.jobsService.save({ name }).subscribe(
+      this.jobsService.create({ name }).subscribe(
         (success) => {
           this.handleSuccess();
         },
