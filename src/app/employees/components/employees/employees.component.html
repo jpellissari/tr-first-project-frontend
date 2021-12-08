@@ -41,7 +41,7 @@
           *ngIf="sideForm.isTargetUpdate()"
           [employee]="selectedEmployee"
           (formClosed)="sideForm.close()"
-          (employeeUpdatedEvent)="refresh()"
+          (employeeUpdated)="refresh()"
         ></app-edit-employee>
       </div>
     </div>

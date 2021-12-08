@@ -53,12 +53,12 @@
     }
   },
   "employees": {
-    "title": "Empregados",
+    "title": "Funcionários",
     "actions": {
       "search": {
-        "placeholder": "Buscar Empregados..."
+        "placeholder": "Buscar Funcionários..."
       },
-      "add_button": "Novo Empregado"
+      "add_button": "Novo Funcionário"
     },
     "forms": {
       "add": {
@@ -127,7 +127,7 @@
     },
     "table": {
       "header": {
-        "name": "Nome do Empregado",
+        "name": "Nome do Funcionário",
         "client": "Nome da Empresa",
         "job": "Cargo",
         "national_identity": "CPF",
