@@ -15,6 +15,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarModule } from './sidebar/sidebar.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 registerLocaleData(pt);
 
@@ -28,6 +29,7 @@ registerLocaleData(pt);
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     FormsModule,
+    NgxMaskModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

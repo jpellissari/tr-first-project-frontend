@@ -21,7 +21,7 @@ import { NgxMaskModule } from 'ngx-mask';
     ReactiveFormsModule,
     NzPopconfirmModule,
     NzIconModule,
-    NgxMaskModule
+    NgxMaskModule.forChild()
   ],
   exports: [
     InputComponent,

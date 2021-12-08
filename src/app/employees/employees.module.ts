@@ -27,7 +27,6 @@ import { EmployeesComponent } from './components/employees/employees.component';
     SharedModule,
     NzSelectModule,
     NzDatePickerModule,
-    NgxMaskModule.forRoot(),
     NgxCurrencyModule,
     NzCheckboxModule
   ]
