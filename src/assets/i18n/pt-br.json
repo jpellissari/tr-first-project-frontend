@@ -69,7 +69,26 @@
         },
         "success": "Funcionário cadastrado com sucesso!"
       },
+      "edit": {
+        "title": "Editar Funcionário",
+        "buttons": {
+          "success": "Editar",
+          "cancel": "Cancelar"
+        },
+        "success": "Funcionário editado com sucesso!"
+      },
+      "delete": {
+        "message": "Tem certeza que deseja remover este funcionário?",
+        "buttons": {
+          "delete": "Sim, tenho certeza!",
+          "cancel": "Não, quero voltar."
+        },
+        "success": "Funcionário removido com sucesso!"
+      },
       "fields": {
+        "id": {
+          "label": "ID"
+        },
         "name": {
           "label": "Nome",
           "placeholder": "Digite o nome do funcionário"
@@ -122,17 +141,6 @@
       "EMPLOYEE": "Empregado",
       "INTERN": "Estagiário",
       "PARTNER": "Contribuinte"
-    },
-    "editEmployee": {
-      "title": "Editar Empregado",
-      "success": "Empregado atualizado com sucesso!",
-      "buttons": {
-        "confirm": "Editar",
-        "cancel": "Cancelar"
-      }
-    },
-    "deleteEmployee": {
-      "success": "Empregado deletado com sucesso"
     }
   },
   "leaves": {
