@@ -18,8 +18,7 @@ import { FormHelperService } from 'src/app/shared/services/form-helper.service';
 
 @Component({
   selector: 'app-add-leave',
-  templateUrl: './add-leave.component.html',
-  styleUrls: ['./add-leave.component.scss']
+  templateUrl: './add-leave.component.html'
 })
 export class AddLeaveComponent implements OnInit {
   @Output() formClosed = new EventEmitter<void>();
