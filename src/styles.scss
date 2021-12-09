@@ -222,15 +222,14 @@ ngx-spinner {
   }
 }
 
-.is-invalid {
-  label {
-    color: red;
-  }
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+  margin-bottom: 0px;
+}
 
-  input {
-    border: 1px solid red;
-    margin-bottom: 0px;
-  }
+nz-select.ng-invalid.ng-touched {
+  border: 1px solid red;
+  margin-bottom: 0px;
 }
 
 .button-wrapper {

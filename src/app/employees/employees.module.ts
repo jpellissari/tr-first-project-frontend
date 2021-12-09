@@ -13,6 +13,7 @@ import { EditEmployeeComponent } from './components/edit-employee/edit-employee.
 import { ListEmployeesComponent } from './components/list-employees/list-employees.component';
 import { SharedModule } from '../shared/shared.module';
 import { EmployeesComponent } from './components/employees/employees.component';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { EmployeesComponent } from './components/employees/employees.component';
     NzSelectModule,
     NzDatePickerModule,
     NgxCurrencyModule,
-    NzCheckboxModule
+    NzCheckboxModule,
+    NzInputModule
   ]
 })
 export class EmployeesModule {}

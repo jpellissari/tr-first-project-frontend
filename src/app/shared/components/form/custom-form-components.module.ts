@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { DeleteButtonComponent } from './delete-button/delete-button.component';
 import { InputComponent } from './input/input.component';
 import { ValidationComponent } from './validation/validation.component';
@@ -21,6 +22,7 @@ import { NgxMaskModule } from 'ngx-mask';
     ReactiveFormsModule,
     NzPopconfirmModule,
     NzIconModule,
+    NzInputModule,
     NgxMaskModule.forChild()
   ],
   exports: [
