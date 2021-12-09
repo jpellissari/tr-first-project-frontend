@@ -4,11 +4,13 @@ import { EMPTY, Observable } from 'rxjs';
 import { catchError, map, take, tap } from 'rxjs/operators';
 import { AddEntityService } from 'src/app/shared/services/add-entity.service';
 import { DeleteEntityService } from 'src/app/shared/services/delete-entity.service';
+import { EditEntityService } from 'src/app/shared/services/edit-entity.service';
 import { FindByIdEntityService } from 'src/app/shared/services/find-by-id-entity.service';
 import { ListEntityService } from 'src/app/shared/services/list-entity.service';
 import { environment } from 'src/environments/environment';
 import { IApiLeave } from '../models/api-leave';
 import { ApiSimplifiedLeave } from '../models/api-simplified-leave';
+import { EditLeave } from '../models/edit-leave';
 import { ILeave, Leave } from '../models/leave';
 import { NewLeave } from '../models/new-leave';
 
@@ -20,12 +22,19 @@ export class LeavesService
     ListEntityService<ApiSimplifiedLeave>,
     FindByIdEntityService<ILeave>,
     AddEntityService<NewLeave>,
+    EditEntityService<EditLeave>,
     DeleteEntityService
 {
   private readonly API_URL: string;
 
   constructor(private readonly http: HttpClient) {
     this.API_URL = `${environment.api.baseUrl}/leaves`;
+  }
+
+  update(entity: EditLeave): Observable<Object> {
+    return this.http
+      .put(`${this.API_URL}/${entity.leaveId}`, entity)
+      .pipe(take(1));
   }
 
   create(entity: NewLeave): Observable<Object> {

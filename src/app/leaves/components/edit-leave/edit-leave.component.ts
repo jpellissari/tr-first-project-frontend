@@ -5,8 +5,7 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Output,
-  SimpleChanges
+  Output
 } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -23,8 +22,8 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 import { LeaveType, LeaveTypes } from '../../models/leave-type';
 import { LeavesService } from '../../services/leaves.service';
 import { Type } from '../../models/type';
-import { ApiSimplifiedLeave } from '../../models/api-simplified-leave';
 import { ILeave } from '../../models/leave';
+import { EditLeave } from '../../models/edit-leave';
 
 @Component({
   selector: 'app-edit-leave',
@@ -197,14 +196,16 @@ export class EditLeaveComponent implements OnInit, OnChanges {
     if (this.form.valid) {
       this.loadingService.start();
 
-      const body = this.form.value;
-      body.employeeId = body.employee.id;
-      body.leaveType = body.leaveType.type;
-      body.leaveDate = this.datePipe.transform(body.leaveDate, 'dd/MM/yyyy');
+      this.form.value.leaveId = this.form.getRawValue().id;
 
-      this.leavesService.create(body).subscribe(
+      const body = EditLeave.create(this.form.value);
+
+      this.leavesService.update(body).subscribe(
         (success) => {
-          this.handleSuccess('teste');
+          const message = this.getTranslationMessageFor(
+            'leaves.forms.edit.success'
+          );
+          this.handleSuccess(message);
         },
         (error) => {
           this.handleError(error);
