@@ -3,8 +3,8 @@ import { Title } from '@angular/platform-browser';
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { ToastService } from 'src/app/shared/services/toast.service';
-import { LoadingService } from 'src/app/shared/services/loading.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { LoadingService } from 'src/app/shared/services/loading/loading.service';
 import { Client } from '../../models/client';
 import { Observable, Subject, EMPTY, of } from 'rxjs';
 import { tap, catchError, takeUntil } from 'rxjs/operators';

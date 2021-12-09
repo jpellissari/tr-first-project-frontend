@@ -4,8 +4,8 @@ import { Observable, of, Subject } from 'rxjs';
 import { ClientsService } from 'src/app/clients/service/clients.service';
 import { JobPositionsService } from 'src/app/job-positions/service/job-positions.service';
 
-import { LoadingService } from 'src/app/shared/services/loading.service';
-import { ToastService } from 'src/app/shared/services/toast.service';
+import { LoadingService } from 'src/app/shared/services/loading/loading.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { EmployeesService } from '../../services/employees.service';
 import { CpfCnpjValidator } from 'src/app/shared/validators/cpf-cnpj-validator';
 import { DatePipe } from '@angular/common';

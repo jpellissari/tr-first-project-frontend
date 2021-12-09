@@ -12,8 +12,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { LoadingService } from 'src/app/shared/services/loading.service';
-import { ToastService } from 'src/app/shared/services/toast.service';
+import { LoadingService } from 'src/app/shared/services/loading/loading.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { Client } from '../../models/client';
 import { ClientsService } from '../../service/clients.service';
 

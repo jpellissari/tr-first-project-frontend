@@ -6,8 +6,8 @@ import { takeUntil, tap, catchError } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 
 import { environment } from 'src/environments/environment';
-import { LoadingService } from 'src/app/shared/services/loading.service';
-import { ToastService } from 'src/app/shared/services/toast.service';
+import { LoadingService } from 'src/app/shared/services/loading/loading.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { SideForm } from 'src/app/shared/models/side-form';
 import { IEmployee } from '../../models/employee';
 import { EmployeesService } from '../../services/employees.service';

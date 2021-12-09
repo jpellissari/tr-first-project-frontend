@@ -3,8 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { take } from 'rxjs/operators';
 
-import { LoadingService } from 'src/app/shared/services/loading.service';
-import { ToastService } from 'src/app/shared/services/toast.service';
+import { LoadingService } from 'src/app/shared/services/loading/loading.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { JobPositionsService } from '../../service/job-positions.service';
 
 @Component({
