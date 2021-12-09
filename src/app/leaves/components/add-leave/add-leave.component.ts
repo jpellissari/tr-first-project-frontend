@@ -202,7 +202,6 @@ export class AddLeaveComponent implements OnInit {
         })
         .pipe(take(1))
         .subscribe((message) => this.toastService.showErrorMessage(message));
-      this.toastService.showErrorMessage(error);
     } else if (error.error.message === 'Already has CONTRIBUTORS_DEATH.') {
       this.translateService
         .get('leaves.forms.errors.death', {
@@ -210,7 +209,6 @@ export class AddLeaveComponent implements OnInit {
         })
         .pipe(take(1))
         .subscribe((message) => this.toastService.showErrorMessage(message));
-      this.toastService.showErrorMessage(error);
     } else {
       this.toastService.showErrorMessage(error);
     }
