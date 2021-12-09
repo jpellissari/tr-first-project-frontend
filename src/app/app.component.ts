@@ -10,6 +10,6 @@ export class AppComponent {
   title = 'frontend-scss';
 
   constructor(private translate: TranslateService) {
-    translate.setDefaultLang('pt-br');
+    this.translate.setDefaultLang('pt-br');
   }
 }
