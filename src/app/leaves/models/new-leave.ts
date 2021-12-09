@@ -1,9 +1,10 @@
 import { format } from 'date-fns';
+import { Employee } from 'src/app/employees/models/employee';
 import { LeaveType } from './leave-type';
 
 type ICreateLeaveDTO = {
   clientId: string;
-  employeeId: string;
+  employee: Employee;
   leaveType: LeaveType;
   leaveDate: Date;
   numberDays: number;
@@ -37,7 +38,8 @@ export class NewLeave {
   static create(data: ICreateLeaveDTO): NewLeave {
     const leaveDate = format(data.leaveDate, 'dd/MM/yyyy');
     const leaveType = data.leaveType.type;
+    const employeeId = data.employee.id;
 
-    return new NewLeave({ ...data, leaveDate, leaveType });
+    return new NewLeave({ ...data, leaveDate, leaveType, employeeId });
   }
 }

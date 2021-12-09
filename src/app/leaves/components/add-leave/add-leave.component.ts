@@ -48,8 +48,7 @@ export class AddLeaveComponent implements OnInit {
     private readonly employeesService: EmployeesService,
     private readonly toastService: ToastService,
     private readonly loadingService: LoadingService,
-    private readonly translateService: TranslateService,
-    private datePipe: DatePipe
+    private readonly translateService: TranslateService
   ) {
     this.form = this.createForm();
     this.types = Object.values(Type);
@@ -169,7 +168,7 @@ export class AddLeaveComponent implements OnInit {
   private createForm(): FormGroup {
     return this.formBuilder.group({
       clientId: [null, Validators.required],
-      employeeId: [null, Validators.required],
+      employee: [null, Validators.required],
       leaveType: [null, Validators.required],
       leaveDate: [null, Validators.required],
       numberDays: [
@@ -203,6 +202,7 @@ export class AddLeaveComponent implements OnInit {
         })
         .pipe(take(1))
         .subscribe((message) => this.toastService.showErrorMessage(message));
+      this.toastService.showErrorMessage(error);
     } else if (error.error.message === 'Already has CONTRIBUTORS_DEATH.') {
       this.translateService
         .get('leaves.forms.errors.death', {
@@ -210,6 +210,7 @@ export class AddLeaveComponent implements OnInit {
         })
         .pipe(take(1))
         .subscribe((message) => this.toastService.showErrorMessage(message));
+      this.toastService.showErrorMessage(error);
     } else {
       this.toastService.showErrorMessage(error);
     }
